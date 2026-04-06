@@ -281,10 +281,10 @@
 
     /* Layer 1 — content */
     .c-hero__inner {
-      display: flex;
-      align-items: flex-start;
-      justify-content: space-between;
-      gap: var(--s8);
+      display: grid;
+      grid-template-columns: 1fr 280px;
+      align-items: start;
+      gap: var(--s16);
       max-width: 1280px;
       width: 100%;
       margin: 0 auto;
@@ -363,81 +363,39 @@
       color: var(--fg-1);
     }
 
-    /* Photo with registration marks */
-    .c-hero__photo-wrap {
-      position: relative;
-      flex-shrink: 0;
-      animation: fadeUp 0.7s 0.2s var(--ease) both;
-    }
-
-    .c-hero__photo-frame {
-      position: relative;
-      width: 280px;
-    }
-
-    .c-hero__photo-frame img {
-      display: block;
-      width: 280px;
-      height: 360px;
-      object-fit: cover;
-      object-position: center top;
+    /* ── Spec card (photo 대체) ──────────────────────────────── */
+    .c-hero__spec {
       border: 1px solid var(--border-2);
-      filter: grayscale(15%) contrast(1.02);
+      padding: var(--s3);
+      animation: fadeUp 0.7s 0.2s var(--ease) both;
+      position: relative;
+      top: 6px;
     }
-
-    /* Registration marks — corners */
-    .c-hero__photo-frame::before,
-    .c-hero__photo-frame::after,
-    .c-hero__photo-frame .c-reg-tl,
-    .c-hero__photo-frame .c-reg-br {
-      content: '';
-      position: absolute;
-      width: 14px;
-      height: 14px;
-      border-color: var(--accent);
-      border-style: solid;
-      border-width: 0;
-      pointer-events: none;
-      z-index: 2;
-    }
-
-    .c-hero__photo-frame .c-reg-tl {
-      top: -4px;
-      left: -4px;
-      border-top-width: 1px;
-      border-left-width: 1px;
-    }
-
-    .c-hero__photo-frame::before {
-      top: -4px;
-      right: -4px;
-      border-top-width: 1px;
-      border-right-width: 1px;
-    }
-
-    .c-hero__photo-frame::after {
-      bottom: -4px;
-      left: -4px;
-      border-bottom-width: 1px;
-      border-left-width: 1px;
-    }
-
-    .c-hero__photo-frame .c-reg-br {
-      bottom: -4px;
-      right: -4px;
-      border-bottom-width: 1px;
-      border-right-width: 1px;
-    }
-
-    .c-hero__photo-label {
+    .c-hero__spec-label {
       font-family: var(--font-mono);
-      font-size: 9px;
+      font-size: 10px;
       letter-spacing: 0.1em;
-      color: var(--fg-3);
-      text-align: right;
-      margin-top: var(--s2);
+      color: var(--accent);
       text-transform: uppercase;
+      padding-bottom: var(--s2);
+      margin-bottom: var(--s2);
+      border-bottom: 1px solid var(--border);
     }
+    .c-hero__spec-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      gap: var(--s2);
+      padding: 5px 0;
+      border-bottom: 1px solid var(--border);
+      font-family: var(--font-mono);
+      font-size: 10px;
+      letter-spacing: 0.04em;
+    }
+    .c-hero__spec-row span:first-child { color: var(--fg-3); white-space: nowrap; }
+    .c-hero__spec-row span:last-child  { color: var(--fg-2); text-align: right; }
+    .c-hero__spec-rule { height: var(--s2); }
+    .c-hero__spec-live { color: var(--accent) !important; }
 
     /* ── COMPONENT: SECTION ──────────────────────────────────── */
     .c-section {
@@ -909,18 +867,11 @@
       }
 
       .c-hero__inner {
-        flex-direction: column-reverse;
+        grid-template-columns: 1fr;
         gap: var(--s5);
       }
 
-      .c-hero__photo-frame {
-        width: 160px;
-      }
-
-      .c-hero__photo-frame img {
-        width: 160px;
-        height: 200px;
-      }
+      .c-hero__spec { display: none; }
 
       .c-hero__meta {
         grid-template-columns: 1fr 1fr;
@@ -1030,13 +981,16 @@
           <span class="c-hero__meta-value">AI Trust · HCI · UX Research</span>
         </div>
       </div>
-      <div class="c-hero__photo-wrap">
-        <div class="c-hero__photo-frame">
-          <span class="c-reg-tl"></span>
-          <span class="c-reg-br"></span>
-          <img src="assets/9A1D5D6C-D54C-437A-A0B9-BF434BA5EEDC.jpg" alt="Choi SeongJoon">
-        </div>
-        <p class="c-hero__photo-label">Choi SeongJoon · 2026</p>
+      <div class="c-hero__spec" aria-hidden="true">
+        <div class="c-hero__spec-label">design.system / v1.0</div>
+        <div class="c-hero__spec-row"><span>grid</span><span>8pt base unit</span></div>
+        <div class="c-hero__spec-row"><span>surface</span><span>3-tier layer</span></div>
+        <div class="c-hero__spec-row"><span>accent</span><span>#a8d84e · #55b8e2</span></div>
+        <div class="c-hero__spec-row"><span>type</span><span>mono / sans / display</span></div>
+        <div class="c-hero__spec-row"><span>radius</span><span>0px (default)</span></div>
+        <div class="c-hero__spec-row"><span>border</span><span>1px #ffffff0f</span></div>
+        <div class="c-hero__spec-rule"></div>
+        <div class="c-hero__spec-row"><span>status</span><span class="c-hero__spec-live">● available</span></div>
       </div>
     </div>
   </div>
