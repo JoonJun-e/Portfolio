@@ -1,0 +1,1127 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>최성준 — UX Researcher Portfolio</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:wght@300;400;500&family=DM+Mono:wght@400;500&display=swap"
+    rel="stylesheet">
+  <link rel="stylesheet"
+    href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css">
+  <style>
+    *,
+    *::before,
+    *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    :root {
+      --bg: #0e0e0e;
+      --surface: #161616;
+      --border: rgba(255, 255, 255, 0.08);
+      --text: #f0ede6;
+      --muted: rgba(240, 237, 230, 0.6);
+      --accent: #c8f0a0;
+      --accent2: #a0d4f0;
+      --serif: 'Pretendard Variable', 'Pretendard', 'DM Serif Display', Georgia, serif;
+      --sans: 'Pretendard Variable', 'Pretendard', 'DM Sans', system-ui, sans-serif;
+      --mono: 'Pretendard Variable', 'Pretendard', 'DM Mono', monospace;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: var(--sans);
+      font-weight: 350;
+      line-height: 1.75;
+      min-height: 100vh;
+      word-break: keep-all;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    /* NAV */
+    nav {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 100;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 1.25rem 3rem;
+      border-bottom: 1px solid var(--border);
+      background: rgba(14, 14, 14, 0.85);
+      backdrop-filter: blur(12px);
+    }
+
+    .nav-logo {
+      font-family: var(--mono);
+      font-size: 13px;
+      letter-spacing: 0.08em;
+      color: var(--muted);
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 2.5rem;
+      list-style: none;
+      font-size: 14px;
+      letter-spacing: 0.02em;
+      color: var(--muted);
+    }
+
+    .nav-links a:hover {
+      color: var(--text);
+    }
+
+    /* SECTION PROGRESS BAR */
+    .section-progress {
+      position: fixed;
+      top: 57px;
+      left: 0;
+      right: 0;
+      z-index: 98;
+      background: rgba(14, 14, 14, 0.92);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border);
+      padding: 0.75rem 3rem;
+      display: flex;
+      justify-content: center;
+    }
+
+    .progress-inner {
+      display: flex;
+      align-items: center;
+      max-width: 1200px;
+      width: 100%;
+    }
+
+    .prog-item {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 0.3rem;
+      text-decoration: none;
+      flex-shrink: 0;
+      cursor: pointer;
+    }
+
+    .prog-dot {
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: rgba(255, 255, 255, 0.15);
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      transition: all 0.25s;
+    }
+
+    .prog-label {
+      font-family: var(--mono);
+      font-size: 10px;
+      letter-spacing: 0.08em;
+      color: var(--muted);
+      transition: color 0.25s;
+      white-space: nowrap;
+    }
+
+    .prog-item:hover .prog-dot {
+      background: var(--text);
+      border-color: var(--text);
+    }
+
+    .prog-item:hover .prog-label {
+      color: var(--text);
+    }
+
+    .prog-item.active .prog-dot {
+      background: var(--accent);
+      border-color: var(--accent);
+      box-shadow: 0 0 8px rgba(200, 240, 160, 0.5);
+    }
+
+    .prog-item.active .prog-label {
+      color: var(--accent);
+    }
+
+    .prog-line {
+      flex: 1;
+      height: 1px;
+      background: var(--border);
+      margin-bottom: 1.15rem;
+      min-width: 1rem;
+    }
+
+    /* HERO */
+    .hero {
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      padding: 7rem 3rem 6rem;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero::before {
+      content: '';
+      position: absolute;
+      top: -20%;
+      right: -10%;
+      width: 600px;
+      height: 600px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(200, 240, 160, 0.06) 0%, transparent 70%);
+      pointer-events: none;
+    }
+
+    .hero-content {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 4rem;
+      max-width: 1200px;
+      margin: 0 auto;
+      width: 100%;
+    }
+
+    .hero-text {
+      flex: 1;
+      animation: fadeUp 0.6s ease both;
+    }
+
+    .hero-image {
+      flex-shrink: 0;
+      animation: fadeUp 0.6s 0.3s ease both;
+    }
+
+    .hero-image img {
+      width: 300px;
+      height: 380px;
+      object-fit: cover;
+      object-position: center top;
+      border-radius: 160px;
+      border: 1px solid var(--border);
+      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.5);
+    }
+
+    .hero-label {
+      font-family: var(--mono);
+      font-size: 12px;
+      letter-spacing: 0.15em;
+      color: var(--accent);
+      text-transform: uppercase;
+      margin-bottom: 1.5rem;
+    }
+
+    .hero h1 {
+      font-family: var(--serif);
+      font-size: clamp(3rem, 7vw, 5.5rem);
+      font-weight: 400;
+      line-height: 1.1;
+      letter-spacing: -0.01em;
+      margin-bottom: 2.5rem;
+      max-width: 900px;
+    }
+
+    .hero h1 em {
+      font-style: italic;
+      color: var(--muted);
+      font-size: 0.8em;
+      display: block;
+      margin-top: 0.2rem;
+    }
+
+    .hero-meta {
+      display: flex;
+      gap: 3.5rem;
+      flex-wrap: wrap;
+    }
+
+    .hero-meta-item {
+      display: flex;
+      flex-direction: column;
+      gap: 0.4rem;
+    }
+
+    .hero-meta-label {
+      font-family: var(--mono);
+      font-size: 10px;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--muted);
+    }
+
+    .hero-meta-value {
+      font-size: 14px;
+      font-weight: 400;
+      color: var(--text);
+    }
+
+    /* SECTIONS */
+    section {
+      padding: 6rem 3rem;
+      border-top: 1px solid var(--border);
+      max-width: 1200px;
+      margin: 0 auto;
+      scroll-margin-top: 110px;
+    }
+
+    .section-label {
+      font-family: var(--mono);
+      font-size: 12px;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin-bottom: 3.5rem;
+      display: flex;
+      align-items: center;
+      gap: 1.5rem;
+    }
+
+    .section-label::after {
+      content: '';
+      flex: 1;
+      height: 1px;
+      background: var(--border);
+      max-width: 100px;
+    }
+
+    /* RESEARCH / COMPETENCIES */
+    .research-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 1px;
+      background: var(--border);
+    }
+
+    .research-card {
+      background: var(--bg);
+      padding: 2.5rem;
+      transition: background 0.2s;
+    }
+
+    .research-card:hover {
+      background: var(--surface);
+    }
+
+    .research-card {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .research-card h3 {
+      font-size: 1.3rem;
+      font-weight: 500;
+      margin-bottom: 1rem;
+      color: white;
+      min-height: 4.6rem;
+      display: flex;
+      align-items: flex-start;
+    }
+
+    .research-card p {
+      font-size: 14px;
+      color: var(--muted);
+      line-height: 1.6;
+    }
+
+    /* EXPERIENCE & EDUCATION */
+    .exp-list {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .exp-item {
+      display: grid;
+      grid-template-columns: 220px 1fr;
+      gap: 3rem;
+      padding: 3rem 0;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .exp-item:first-child {
+      border-top: 1px solid var(--border);
+    }
+
+    .exp-left {
+      padding-top: 0.2rem;
+    }
+
+    .exp-company {
+      font-family: var(--mono);
+      font-size: 13px;
+      letter-spacing: 0.05em;
+      color: var(--accent2);
+      margin-bottom: 0.4rem;
+    }
+
+    .exp-period {
+      font-size: 13px;
+      color: var(--muted);
+    }
+
+    .exp-right h3 {
+      font-size: 1.4rem;
+      font-weight: 500;
+      margin-bottom: 1rem;
+      color: white;
+    }
+
+    .exp-right p {
+      font-size: 15px;
+      color: var(--muted);
+      line-height: 1.7;
+      margin-bottom: 1.2rem;
+    }
+
+    .exp-right ul {
+      list-style: none;
+      margin-bottom: 1.5rem;
+    }
+
+    .exp-right ul li {
+      font-size: 15px;
+      margin-bottom: 0.8rem;
+      position: relative;
+      padding-left: 1rem;
+      color: var(--text);
+    }
+
+    .exp-right ul li::before {
+      content: '・';
+      position: absolute;
+      left: 0;
+      color: var(--accent);
+    }
+
+    .tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.6rem;
+    }
+
+    .tag {
+      font-family: var(--mono);
+      font-size: 11px;
+      letter-spacing: 0.03em;
+      padding: 0.35rem 0.85rem;
+      border: 1px solid var(--border);
+      border-radius: 100px;
+      color: var(--muted);
+    }
+
+    /* AWARD BADGE */
+    .award-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      font-family: var(--mono);
+      font-size: 11px;
+      letter-spacing: 0.06em;
+      padding: 0.3rem 0.75rem;
+      background: rgba(160, 212, 240, 0.08);
+      border: 1px solid rgba(160, 212, 240, 0.25);
+      color: var(--accent2);
+      border-radius: 6px;
+      margin-bottom: 1rem;
+    }
+
+    .award-badge::before {
+      content: '🏆';
+      font-size: 10px;
+    }
+
+    /* PUBLICATIONS */
+    .pub-item {
+      padding: 2.5rem 0;
+      border-bottom: 1px solid var(--border);
+      display: grid;
+      grid-template-columns: auto 1fr;
+      gap: 2rem;
+      align-items: start;
+    }
+
+    .pub-item:first-child {
+      border-top: 1px solid var(--border);
+    }
+
+    .pub-badge {
+      font-family: var(--mono);
+      font-size: 12px;
+      letter-spacing: 0.08em;
+      padding: 0.35rem 0.8rem;
+      background: rgba(200, 240, 160, 0.08);
+      border: 1px solid rgba(200, 240, 160, 0.2);
+      color: var(--accent);
+      border-radius: 6px;
+      white-space: nowrap;
+      margin-top: 0.2rem;
+    }
+
+    .pub-title {
+      font-size: 1.2rem;
+      font-weight: 500;
+      margin-bottom: 0.6rem;
+      color: white;
+    }
+
+    .pub-meta {
+      font-size: 14px;
+      color: var(--muted);
+      line-height: 1.6;
+    }
+
+    /* SKILLS */
+    .skills-table {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      column-gap: 6rem;
+      row-gap: 0;
+      margin-bottom: 3.5rem;
+    }
+
+    .skills-col-header {
+      font-family: var(--mono);
+      font-size: 12px;
+      letter-spacing: 0.1em;
+      color: var(--accent);
+      padding-bottom: 1.2rem;
+    }
+
+    .skill-row-item {
+      font-size: 15px;
+      color: var(--text);
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      padding: 0.55rem 0;
+      border-top: 1px solid var(--border);
+    }
+
+    .dot {
+      width: 4px;
+      height: 4px;
+      border-radius: 50%;
+      background: var(--muted);
+      flex-shrink: 0;
+    }
+
+    .tool-row-item {
+      font-size: 15px;
+      color: var(--text);
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      padding: 0.55rem 0;
+      border-top: 1px solid var(--border);
+    }
+
+    .tool-label {
+      font-size: 12px;
+      color: var(--muted);
+      font-family: var(--mono);
+      white-space: nowrap;
+    }
+
+    .tool-label::after {
+      content: ' :';
+    }
+
+    .cert-section {
+      padding-top: 3rem;
+      border-top: 1px solid var(--border);
+    }
+
+    .cert-header {
+      font-family: var(--mono);
+      font-size: 12px;
+      letter-spacing: 0.1em;
+      color: var(--accent);
+      margin-bottom: 1.2rem;
+    }
+
+    .cert-list {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 0.75rem;
+    }
+
+    .cert-list li {
+      display: flex;
+      align-items: baseline;
+      gap: 1rem;
+      flex-wrap: wrap;
+    }
+
+    .cert-list strong {
+      font-size: 15px;
+      font-weight: 500;
+      color: var(--text);
+    }
+
+    .cert-meta {
+      font-size: 12px;
+      color: var(--muted);
+      font-family: var(--mono);
+      letter-spacing: 0.03em;
+    }
+
+    /* FOOTER */
+    footer {
+      border-top: 1px solid var(--border);
+      padding: 3rem;
+      max-width: 1200px;
+      margin: 0 auto;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 1.5rem;
+    }
+
+    footer p {
+      font-size: 13px;
+      color: var(--muted);
+      font-family: var(--mono);
+    }
+
+    .contact-links {
+      display: flex;
+      gap: 2.5rem;
+    }
+
+    .contact-links a {
+      font-size: 14px;
+      color: var(--muted);
+      font-family: var(--mono);
+      letter-spacing: 0.05em;
+      transition: color 0.2s;
+    }
+
+    .contact-links a:hover {
+      color: var(--accent);
+    }
+
+    /* ANIMATIONS */
+    @keyframes fadeUp {
+      from {
+        opacity: 0;
+        transform: translateY(24px);
+      }
+
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    /* RESPONSIVE */
+    @media (max-width: 768px) {
+      nav {
+        padding: 1rem 1.5rem;
+      }
+
+      .nav-links {
+        display: none;
+      }
+
+      .section-progress {
+        padding: 0.6rem 1.5rem;
+      }
+
+      .prog-label {
+        display: none;
+      }
+
+      .hero {
+        padding: 7rem 1.5rem 4rem;
+      }
+
+      .hero-content {
+        flex-direction: column-reverse;
+        align-items: flex-start;
+        gap: 3rem;
+      }
+
+      .hero-image img {
+        width: 160px;
+        height: 200px;
+      }
+
+      section {
+        padding: 5rem 1.5rem;
+      }
+
+      .exp-item {
+        grid-template-columns: 1fr;
+        gap: 1rem;
+        padding: 2.5rem 0;
+      }
+
+      .pub-item {
+        grid-template-columns: 1fr;
+        gap: 1rem;
+      }
+
+      .skills-table {
+        grid-template-columns: 1fr;
+        column-gap: 0;
+      }
+
+      footer {
+        padding: 2rem 1.5rem;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <nav>
+    <span class="nav-logo">CSJ — Portfolio</span>
+    <ul class="nav-links">
+      <li><a href="#competencies">역량</a></li>
+      <li><a href="#education">학력</a></li>
+      <li><a href="#experience">경력</a></li>
+      <li><a href="#projects">프로젝트</a></li>
+      <li><a href="#publications">연구 실적</a></li>
+      <li><a href="#skills">스킬 및 자격증</a></li>
+    </ul>
+  </nav>
+
+  <div class="section-progress">
+    <div class="progress-inner">
+      <a href="#competencies" class="prog-item" data-section="competencies">
+        <span class="prog-dot"></span>
+        <span class="prog-label">역량</span>
+      </a>
+      <span class="prog-line"></span>
+      <a href="#education" class="prog-item" data-section="education">
+        <span class="prog-dot"></span>
+        <span class="prog-label">학력</span>
+      </a>
+      <span class="prog-line"></span>
+      <a href="#experience" class="prog-item" data-section="experience">
+        <span class="prog-dot"></span>
+        <span class="prog-label">경력</span>
+      </a>
+      <span class="prog-line"></span>
+      <a href="#projects" class="prog-item" data-section="projects">
+        <span class="prog-dot"></span>
+        <span class="prog-label">프로젝트</span>
+      </a>
+      <span class="prog-line"></span>
+      <a href="#publications" class="prog-item" data-section="publications">
+        <span class="prog-dot"></span>
+        <span class="prog-label">연구 실적</span>
+      </a>
+      <span class="prog-line"></span>
+      <a href="#skills" class="prog-item" data-section="skills">
+        <span class="prog-dot"></span>
+        <span class="prog-label">스킬 & 자격증</span>
+      </a>
+    </div>
+  </div>
+
+  <div class="hero">
+    <div class="hero-content">
+      <div class="hero-text">
+        <div class="hero-label">UX Researcher · Human-AI Interaction</div>
+        <h1>최성준<br>Choi SeongJoon</h1>
+        <div class="hero-meta">
+          <div class="hero-meta-item">
+            <span class="hero-meta-label">소속 (Affiliation)</span>
+            <span class="hero-meta-value">성균관대학교(SKKU) HAI LAB 석사과정</span>
+          </div>
+          <div class="hero-meta-item">
+            <span class="hero-meta-label">교환학생 (Exchange)</span>
+            <span class="hero-meta-value">싱가포르 난양공과대학교(NTU) WKWSCI</span>
+          </div>
+          <div class="hero-meta-item">
+            <span class="hero-meta-label">핵심 관심 (Focus)</span>
+            <span class="hero-meta-value">AI 신뢰 및 안전성 · HCI · UX 리서치</span>
+          </div>
+        </div>
+      </div>
+      <div class="hero-image">
+        <img src="assets/9A1D5D6C-D54C-437A-A0B9-BF434BA5EEDC.jpg" alt="Choi SeongJoon 프로필 사진">
+      </div>
+    </div>
+  </div>
+
+  <section id="competencies">
+    <div class="section-label">핵심 역량 및 관심 분야 (Competencies)</div>
+    <div class="research-grid">
+      <div class="research-card">
+        <h3>인간-AI 상호작용 설계</h3>
+        <p>프로덕트와 서비스 환경에서 사용자가 AI 시스템과 어떻게 신뢰를 형성하고 의존하며, 데이터를 해석하는지에 대한 사용자 경험(UX) 최적화 방법론을 연구합니다.</p>
+      </div>
+      <div class="research-card">
+        <h3>AI 서비스 경험 및 안전성 개선</h3>
+        <p>AI의 거절 전략(Refusal Strategies), 투명성 확보, 출처 표기가 사용자 행동 지표 및 인지된 안전성에 미치는 영향을 분석하여 실질적인 프로덕트 개선에 기여합니다.</p>
+      </div>
+      <div class="research-card">
+        <h3>사용자 중심 UX 리서치</h3>
+        <p>정량적 데이터 분석(SQL, 구조화 설문 등)과 정성적 방법론(심층 인터뷰, 사용성 테스트 등)을 결합하여, AI 네이티브 프로덕트에 즉각 적용할 수 있는 액셔너블한 인사이트를 도출합니다.</p>
+      </div>
+      <div class="research-card">
+        <h3>대화형/생성형 AI 인터랙션</h3>
+        <p>사용자 프롬프팅 최적화와 모달리티(Voice/Text) 및 응답 구조의 차이가 전체 인터페이스와 사용자 만족도에 미치는 영향을 탐구하고 기획합니다.</p>
+      </div>
+    </div>
+  </section>
+
+  <section id="education">
+    <div class="section-label">학력 (Education)</div>
+    <div class="exp-list">
+
+      <div class="exp-item">
+        <div class="exp-left">
+          <div class="exp-company">성균관대학교 (SKKU)</div>
+          <div class="exp-period">2025.09 – 현재<br>석사과정 재학</div>
+        </div>
+        <div class="exp-right">
+          <h3>인터랙션 사이언스학과 (Interaction Science)</h3>
+          <p><a href="https://hailab.skku.edu/" target="_blank"
+              style="color: var(--accent2); text-decoration: underline; text-underline-offset: 3px;">Human-AI
+              Interaction Lab</a> 소속. AI 신뢰·안전성 및 HCI 방법론을 중심으로 연구 중.</p>
+          <div class="tags">
+            <span class="tag">HCI</span>
+            <span class="tag">Human-AI Interaction</span>
+            <span class="tag">HAI Lab</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="exp-item">
+        <div class="exp-left">
+          <div class="exp-company">난양공과대학교 (NTU)</div>
+          <div class="exp-period">2026.01 – 현재<br>교환학생</div>
+        </div>
+        <div class="exp-right">
+          <h3>Wee Kim Wee School of Communication and Information (WKWSCI)</h3>
+          <p>싱가포르 난양공과대학교 WKWSCI 석사과정 Course Work 이수 중.</p>
+          <div class="tags">
+            <span class="tag">Exchange Student</span>
+            <span class="tag">Singapore</span>
+            <span class="tag">WKWSCI</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="exp-item">
+        <div class="exp-left">
+          <div class="exp-company">가천대학교 (Gachon Univ.)</div>
+          <div class="exp-period">2019.03 – 2025.02<br>학사 졸업</div>
+        </div>
+        <div class="exp-right">
+          <h3>산업경영공학과 · 소프트웨어학과 복수전공</h3>
+          <p>공학적 의사결정 방법론과 소프트웨어 역량을 결합한 융합 전공 이수.</p>
+          <div class="tags">
+            <span class="tag">Industrial & Management Engineering</span>
+            <span class="tag">Software Engineering (Double Major)</span>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <section id="experience">
+    <div class="section-label">주요 경력 (Experience)</div>
+    <div class="exp-list">
+
+      <div class="exp-item">
+        <div class="exp-left">
+          <div class="exp-company">성균관대학교 (SKKU)</div>
+          <div class="exp-period">2025.07 – 현재<br>Human-AI Interaction Lab<br>Researcher</div>
+        </div>
+        <div class="exp-right">
+          <h3>음성 인터랙션 환경의 AI 거절 전략 연구 (CHI 2026)</h3>
+          <ul>
+            <li><strong>실험 플랫폼 직접 설계 및 구현:</strong> 텍스트·음성 모달리티와 출처 정보 조합에 따른 AI 거절 반응을 측정하기 위한 웹 기반 실험 환경을 처음부터 직접 설계하고
+              개발</li>
+            <li><strong>사용자 연구 운영:</strong> 144명 대상 실험의 시나리오 설계 및 참여자 리크루팅 주도 (데이터 수집까지의 파이프라인 관리)</li>
+          </ul>
+          <div class="tags">
+            <span class="tag">Experiment Design</span>
+            <span class="tag">Platform Development</span>
+            <span class="tag">HCI Research</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="exp-item">
+        <div class="exp-left">
+          <div class="exp-company">뤼튼테크놀로지스 (Wrtn)</div>
+          <div class="exp-period">2025.04 – 2025.07<br>Service Ops Manager<br>(UX Research Intern)</div>
+        </div>
+        <div class="exp-right">
+          <h3>엔드투엔드(End-to-End) UX 리서치 및 고객여정 설계</h3>
+          <ul>
+            <li><strong>AI 고객지원 자동화 플로우 설계:</strong> 복잡한 서비스 로직을 직관적인 인터랙션 구조로 변환하여 유저 여정 지도를 그리고, 불필요한 UX 터치포인트를 단축시켜
+              문제 해결 속도 개선</li>
+            <li><strong>데이터 기반 리서치 운영:</strong> SQL을 활용한 빅쿼리 유저 세분화 및 카카오톡 CRM 메시지를 활용한 효율적 대상자 리크루팅 진행</li>
+            <li><strong>인사이트 도출 및 프로덕트 기획안 제안:</strong> 심층 고객 인터뷰(IDI) 데이터를 생성형 AI 플랫폼과 결합하여 분석하고, 향후 리서치 조직을 위한 사내 문서화
+              가이드라인 규격화 달성</li>
+          </ul>
+          <div class="tags">
+            <span class="tag">User Experience Research</span>
+            <span class="tag">Customer eXperience</span>
+            <span class="tag">SQL User Segmentation</span>
+            <span class="tag">Quality Assurance</span>
+            <span class="tag">User Interview</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="exp-item">
+        <div class="exp-left">
+          <div class="exp-company">곰앤컴퍼니 (GOM & Company)</div>
+          <div class="exp-period">2024.09 – 2024.12<br>Product Planning & Operation<br>Intern</div>
+        </div>
+        <div class="exp-right">
+          <h3>프로덕트 기획, UX 개선 및 AI 운용 업무</h3>
+          <ul>
+            <li><strong>서비스 기획 및 자동화 운영:</strong> 배너 교체 자동화 앱 기획 및 개발팀 협업을 통해 배포 → 기존 프로세스 소요시간 <strong>65% 감소</strong>
+            </li>
+            <li><strong>데이터분석 및 UX 고도화:</strong> Splunk 로그 데이터 기반 사용성 지표 분석 중 이상치 탐색으로 쿼리 오류 발견 후 수정 요청 반영 → B2C 주력 제품
+              UX 개선안 도출 및 적용, 해당 기능 리텐션 <strong>15% 이상 증가</strong></li>
+            <li><strong>AI 프롬프트 엔지니어링:</strong> 프로덕트 적용을 위한 LLM 프롬프트 작성, 테스트 베드 내 실험, 퀄리티 컨트롤 및 결과 데이터 가공</li>
+          </ul>
+          <div class="tags">
+            <span class="tag">Product Planning</span>
+            <span class="tag">Service Operation</span>
+            <span class="tag">Process Automation</span>
+            <span class="tag">Data Analysis(Splunk)</span>
+            <span class="tag">UX Improvement</span>
+            <span class="tag">Prompt Engineering</span>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <section id="projects">
+    <div class="section-label">프로젝트 (Projects)</div>
+    <div class="exp-list">
+
+      <div class="exp-item">
+        <div class="exp-left">
+          <div class="exp-company">곰앤컴퍼니</div>
+          <div class="exp-period">2024.09 – 2024.11<br>프로덕트 기획</div>
+        </div>
+        <div class="exp-right">
+          <h3>배너플립 (BannerFlip) — 배너 교체 자동화 백오피스</h3>
+          <ul>
+            <li>다국어 배너 관리 요구사항 분석 및 화면설계서 작성, 개발팀과 협업하여 배포까지 전 과정 주도</li>
+            <li>미리보기·초기화 기능 기획으로 배너 교체 오류율 <strong>0% 달성</strong>, 교체 작업 시간 <strong>70% 단축</strong> (수작업 2시간 → 자동화 20분)
+            </li>
+            <li>국가별 개별 교체 기능 설계로 다국어 배너 관리 효율성 개선 및 신규 제품/케이스 추가 확장성 확보</li>
+          </ul>
+          <div class="tags">
+            <span class="tag">Product Planning</span>
+            <span class="tag">Backoffice</span>
+            <span class="tag">Process Automation</span>
+            <span class="tag">Figma</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="exp-item">
+        <div class="exp-left">
+          <div class="exp-company">dktechin ·<br> Kakao Enterprise SW Academy</div>
+          <div class="exp-period">2024.07 – 2024.08<br>기획 & PM</div>
+        </div>
+        <div class="exp-right">
+          <h3>dkvacation — 사내 휴양시설 추첨 및 예약 서비스</h3>
+          <ul>
+            <li>카카오, 삼성전자, 하나은행 3개 기업 대상 심층 인터뷰 진행 → 현행 시스템의 핵심 문제점 도출 및 서비스 방향성 수립</li>
+            <li>블록체인 기반 추첨 시스템 설계 — 실시간 통계 데이터 제공으로 추첨 투명성 및 사용자 신뢰도 향상</li>
+            <li>가점 정렬 대기순번 프로세스 설계로 미당첨자 우선순위 부여, 형평성 확보</li>
+            <li>WBS·요구사항 정의서·화면설계서 등 프로젝트 전체 산출물 문서화 체계 구축</li>
+          </ul>
+          <div class="tags">
+            <span class="tag">Service Planning</span>
+            <span class="tag">UX Research</span>
+            <span class="tag">Figma</span>
+            <span class="tag">Jira / Confluence</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="exp-item">
+        <div class="exp-left">
+          <div class="exp-company">UMC IT연합동아리</div>
+          <div class="exp-period">2023.09 – 2024.11<br>PM & 서비스 기획</div>
+        </div>
+        <div class="exp-right">
+          <div class="award-badge">UMC 데모데이 Day3 대상 — 25개 대학 / 30팀</div>
+          <h3>음주미식회 — AI 기반 음식·주류 페어링 iOS 앱</h3>
+          <ul>
+            <li>데스크 리서치 및 자체 설문조사(n=80)로 MZ세대 주류 소비 트렌드 분석 → 음식-주류 페어링 니즈 발굴 및 서비스 방향성 수립</li>
+            <li>베타 테스트(n=7) 설계 및 분석 → AI 추천 대기 시간 체감도 개선, 전원 만족도 향상</li>
+            <li>QA 프로세스 체계화 및 60여 개 테스트 케이스 작성/관리 → 앱스토어 심사 통과 및 성공적 런칭</li>
+            <li>데모데이 현장 피드백(약 100명) 수집 및 분석 → 서비스 개선 및 이탈률 감소</li>
+          </ul>
+          <div class="tags">
+            <span class="tag">PM</span>
+            <span class="tag">UX Research</span>
+            <span class="tag">QA</span>
+            <span class="tag">OpenAI API</span>
+            <span class="tag">Figma</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="exp-item">
+        <div class="exp-left">
+          <div class="exp-company">잇타 IT연합동아리</div>
+          <div class="exp-period">2023.03 – 2023.09<br>PM & 서비스 기획</div>
+        </div>
+        <div class="exp-right">
+          <div class="award-badge">잇타 3기 최종발표회 대상</div>
+          <h3>Travelend — 여행자 매칭 플랫폼</h3>
+          <ul>
+            <li>설문조사(n=50) 진행 및 분석 → 여행자 간 매칭 플랫폼 니즈 발굴 및 핵심 기능 도출</li>
+            <li>UX/UI 개선 및 2차 배포 진행 → 메인화면 가독성 개선으로 사용자 정보 전달력 <strong>30% 향상</strong></li>
+            <li>너디너리 데모데이 부스 초청 및 운영 → 현업자 피드백 수렴 및 서비스 개선 방향성 수립</li>
+          </ul>
+          <div class="tags">
+            <span class="tag">PM</span>
+            <span class="tag">UX/UI Planning</span>
+            <span class="tag">User Research</span>
+            <span class="tag">Figma</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="exp-item">
+        <div class="exp-left">
+          <div class="exp-company">SK C&C</div>
+          <div class="exp-period">2023.11<br>팀장</div>
+        </div>
+        <div class="exp-right">
+          <div class="award-badge">생성형 AI 프롬프톤 우수상</div>
+          <h3>SK C&C 대학생 직무프로젝트 — 생성형 AI 파트</h3>
+          <ul>
+            <li>금융 서비스 기획 및 카드 소비 데이터 세그먼트 분석 → 연령대별 차별화된 혜택 구조 설계 및 린캔버스 작성</li>
+            <li>프롬프트 엔지니어링 최적화 방법론 연구 → 6가지 핵심 원칙 도출, UX 시나리오 기반 주종 추천 대화형 GPT 제작</li>
+          </ul>
+          <div class="tags">
+            <span class="tag">Prompt Engineering</span>
+            <span class="tag">Generative AI</span>
+            <span class="tag">Service Planning</span>
+            <span class="tag">Design Thinking</span>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <section id="publications">
+    <div class="section-label">연구 실적 (Publications)</div>
+    <div>
+      <div class="pub-item">
+        <span class="pub-badge">CHI '26 LBW</span>
+        <div>
+          <div class="pub-title">How and Who Should Refuse Harmful Requests in Voice Interaction?<br> Identifying AI
+            Refusal Strategies by Focusing on Shifts in Source and Modality</div>
+          <div
+            style="font-size: 0.88em; font-weight: 300; color: var(--muted); margin-top: 0.3rem; margin-bottom: 0.6rem; line-height: 1.5;">
+            음성 인터랙션 상황에서 AI는 어떻게 거절해야 하는가?: 출처와 모달리티의 변화에 따른 AI 거절 전략 규명</div>
+          <div class="pub-meta">[공동저자], Choi SeongJoon · CHI Conference on Human Factors in Computing Systems, 2026
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="skills">
+    <div class="section-label">스킬 및 자격증 (Skills & Certifications)</div>
+
+    <div class="skills-table">
+      <div class="skills-col-header">직무 역량 (Skills)</div>
+      <div class="skills-col-header">도구 및 AI 활용 (Tools)</div>
+
+      <div class="skill-row-item"><span class="dot"></span>UX 리서치 기반 인사이트 도출</div>
+      <div class="tool-row-item"><span class="tool-label">AI 바이브 코딩 및 디자인</span>Figma Make, Claude Code, Antigravity,
+        Gemini CLI, Claude Artifacts, Gemini Canvas, NotebookLM</div>
+
+      <div class="skill-row-item"><span class="dot"></span>인터랙션 디자인 및 유저 플로우 기획</div>
+      <div class="tool-row-item"><span class="tool-label">문서화 및 디자인</span>Figma, Google Workspace with Gemini</div>
+
+      <div class="skill-row-item"><span class="dot"></span>HCI (인간-컴퓨터 상호작용) 방법론</div>
+      <div class="tool-row-item"><span class="tool-label">리서치 및 분석</span>SQL (BigQuery), Splunk, Mixpanel</div>
+
+      <div class="skill-row-item"><span class="dot"></span>AI 프롬프팅 및 모델 사용 경험 최적화</div>
+      <div class="tool-row-item"><span class="tool-label">어학</span>TOEIC Speaking IH (Intermediate High)</div>
+
+      <div class="skill-row-item"><span class="dot"></span>데이터 분석 논리 및 기획 역량</div>
+      <div class="tool-row-item"></div>
+    </div>
+
+    <div class="cert-section">
+      <h4 class="cert-header">자격증 및 수료내역 (Certifications)</h4>
+      <ul class="cert-list">
+        <li><strong>AI-POT (AI프롬프트 활용능력) 1급</strong><span class="cert-meta">KPC 한국생산성본부 · 2025.08</span></li>
+        <li><strong>Kakao Enterprise SW Academy 4기 (PM) 과정 수료</strong><span class="cert-meta">카카오엔터프라이즈 마이크로디그리 ·
+            2024.08</span></li>
+        <li><strong>ADsP (데이터분석준전문가)</strong><span class="cert-meta">한국데이터산업진흥원 · 2024.06</span></li>
+        <li><strong>SQLD (SQL개발자)</strong><span class="cert-meta">한국데이터산업진흥원 · 2024.04</span></li>
+        <li><strong>6시그마 Black Belt</strong><span class="cert-meta">한국정보인재개발원 · 2024.02</span></li>
+      </ul>
+    </div>
+  </section>
+
+  <footer>
+    <p>© 2026 Choi SeongJoon</p>
+    <div class="contact-links">
+      <a href="https://www.linkedin.com/in/seongjoon-choi-a00057374/" target="_blank">LinkedIn</a>
+    </div>
+  </footer>
+
+  <script>
+    const sections = ['competencies', 'education', 'experience', 'projects', 'publications', 'skills'];
+
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          document.querySelectorAll('.prog-item').forEach(item => item.classList.remove('active'));
+          const active = document.querySelector(`.prog-item[data-section="${entry.target.id}"]`);
+          if (active) active.classList.add('active');
+        }
+      });
+    }, {
+      rootMargin: '-30% 0px -60% 0px'
+    });
+
+    sections.forEach(id => {
+      const el = document.getElementById(id);
+      if (el) observer.observe(el);
+    });
+  </script>
+
+</body>
+
+</html>
