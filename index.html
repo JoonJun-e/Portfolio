@@ -4,15 +4,85 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>최성준 — UX Researcher Portfolio</title>
+  <title>Choi SeongJoon — UX Researcher</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link
-    href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:wght@300;400;500&family=DM+Mono:wght@400;500&display=swap"
+  <link href="https://fonts.googleapis.com/css2?family=DM+Mono:ital,wght@0,300;0,400;0,500;1,300&display=swap"
     rel="stylesheet">
   <link rel="stylesheet"
     href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css">
+
   <style>
+    /* ═══════════════════════════════════════════════════════════════
+     DESIGN SYSTEM — Choi SeongJoon Portfolio
+     Philosophy: "Precision through Methodology"
+     모든 시각적 결정은 의도적이다. 모든 공간은 측정된다.
+  ═══════════════════════════════════════════════════════════════
+     RULES
+     1. GRID    8pt 기본 단위. 모든 간격 = n × 8px
+     2. COLOR   3단계 surface 계층 + 2개 accent
+     3. TYPE    Mono = 시스템/레이블, Sans = 본문, Display = 이름
+     4. LAYER   base(0) → surface(1) → content(2) → overlay(3)
+     5. RADIUS  기본 0(칼각). 태그만 4px 허용.
+     6. BORDER  1px solid, default #ffffff0f, strong #ffffff1f
+  ═══════════════════════════════════════════════════════════════ */
+
+    /* ── TOKENS ──────────────────────────────────────────────── */
+    :root {
+      /* Space (8pt grid) */
+      --s1: 8px;
+      --s2: 16px;
+      --s3: 24px;
+      --s4: 32px;
+      --s5: 40px;
+      --s6: 48px;
+      --s8: 64px;
+      --s10: 80px;
+      --s12: 96px;
+      --s16: 128px;
+
+      /* Color — Surface */
+      --base: #080808;
+      --surface-1: #0f0f0f;
+      --surface-2: #161616;
+      --surface-3: #1e1e1e;
+
+      /* Color — Border */
+      --border: rgba(255, 255, 255, 0.07);
+      --border-2: rgba(255, 255, 255, 0.14);
+      --border-3: rgba(255, 255, 255, 0.22);
+
+      /* Color — Foreground */
+      --fg-1: #ebe5d9;
+      --fg-2: rgba(235, 229, 217, 0.52);
+      --fg-3: rgba(235, 229, 217, 0.26);
+
+      /* Color — Accent */
+      --accent: #a8d84e;
+      --accent-dim: rgba(168, 216, 78, 0.10);
+      --accent-2: #55b8e2;
+      --accent-2-dim: rgba(85, 184, 226, 0.10);
+
+      /* Typography */
+      --font-sans: 'Pretendard Variable', 'Pretendard', system-ui, sans-serif;
+      --font-mono: 'DM Mono', 'Pretendard Variable', monospace;
+
+      /* Type scale */
+      --t-xs: 11px;
+      --t-sm: 13px;
+      --t-base: 15px;
+      --t-md: 17px;
+      --t-lg: 22px;
+      --t-xl: 32px;
+      --t-2xl: 52px;
+      --t-3xl: 84px;
+
+      /* Timing */
+      --ease: cubic-bezier(0.16, 1, 0.3, 1);
+      --dur: 220ms;
+    }
+
+    /* ── RESET ───────────────────────────────────────────────── */
     *,
     *::before,
     *::after {
@@ -21,33 +91,19 @@
       padding: 0;
     }
 
-    :root {
-      --bg: #0e0e0e;
-      --surface: #161616;
-      --border: rgba(255, 255, 255, 0.08);
-      --text: #f0ede6;
-      --muted: rgba(240, 237, 230, 0.6);
-      --accent: #c8f0a0;
-      --accent2: #a0d4f0;
-      --serif: 'Pretendard Variable', 'Pretendard', 'DM Serif Display', Georgia, serif;
-      --sans: 'Pretendard Variable', 'Pretendard', 'DM Sans', system-ui, sans-serif;
-      --mono: 'Pretendard Variable', 'Pretendard', 'DM Mono', monospace;
-    }
-
     html {
       scroll-behavior: smooth;
     }
 
     body {
-      background: var(--bg);
-      color: var(--text);
-      font-family: var(--sans);
+      background: var(--base);
+      color: var(--fg-1);
+      font-family: var(--font-sans);
       font-weight: 350;
-      line-height: 1.75;
+      line-height: 1.7;
       min-height: 100vh;
       word-break: keep-all;
       -webkit-font-smoothing: antialiased;
-      -moz-osx-font-smoothing: grayscale;
     }
 
     a {
@@ -55,8 +111,8 @@
       text-decoration: none;
     }
 
-    /* NAV */
-    nav {
+    /* ── COMPONENT: NAV ──────────────────────────────────────── */
+    .c-nav {
       position: fixed;
       top: 0;
       left: 0;
@@ -65,566 +121,748 @@
       display: flex;
       justify-content: space-between;
       align-items: center;
-      padding: 1.25rem 3rem;
+      padding: 0 var(--s6);
+      height: 56px;
       border-bottom: 1px solid var(--border);
-      background: rgba(14, 14, 14, 0.85);
-      backdrop-filter: blur(12px);
+      background: rgba(8, 8, 8, 0.88);
+      backdrop-filter: blur(16px);
     }
 
-    .nav-logo {
-      font-family: var(--mono);
-      font-size: 13px;
-      letter-spacing: 0.08em;
-      color: var(--muted);
-    }
-
-    .nav-links {
+    .c-nav__logo {
+      font-family: var(--font-mono);
+      font-size: var(--t-xs);
+      letter-spacing: 0.12em;
+      color: var(--fg-3);
+      text-transform: uppercase;
       display: flex;
-      gap: 2.5rem;
+      align-items: center;
+      gap: var(--s2);
+    }
+
+    .c-nav__logo-dot {
+      width: 5px;
+      height: 5px;
+      border-radius: 50%;
+      background: var(--accent);
+    }
+
+    .c-nav__links {
+      display: flex;
+      gap: var(--s1);
       list-style: none;
-      font-size: 14px;
-      letter-spacing: 0.02em;
-      color: var(--muted);
     }
 
-    .nav-links a:hover {
-      color: var(--text);
+    .c-nav__links a {
+      font-family: var(--font-mono);
+      font-size: var(--t-xs);
+      letter-spacing: 0.08em;
+      color: var(--fg-3);
+      padding: var(--s1) var(--s2);
+      transition: color var(--dur) var(--ease);
     }
 
-    /* SECTION PROGRESS BAR */
-    .section-progress {
+    .c-nav__links a:hover {
+      color: var(--fg-1);
+    }
+
+    /* ── COMPONENT: SECTION PROGRESS ────────────────────────── */
+    .c-seqbar {
       position: fixed;
-      top: 57px;
+      top: 56px;
       left: 0;
       right: 0;
-      z-index: 98;
-      background: rgba(14, 14, 14, 0.92);
-      backdrop-filter: blur(12px);
-      border-bottom: 1px solid var(--border);
-      padding: 0.75rem 3rem;
+      z-index: 99;
+      height: 40px;
       display: flex;
       justify-content: center;
+      align-items: center;
+      background: rgba(8, 8, 8, 0.92);
+      backdrop-filter: blur(16px);
+      border-bottom: 1px solid var(--border);
+      padding: 0 var(--s6);
     }
 
-    .progress-inner {
+    .c-seqbar__inner {
       display: flex;
       align-items: center;
-      max-width: 1200px;
+      max-width: 1280px;
       width: 100%;
+      gap: 0;
     }
 
-    .prog-item {
+    .c-seqbar__item {
       display: flex;
-      flex-direction: column;
       align-items: center;
-      gap: 0.3rem;
+      gap: var(--s1);
       text-decoration: none;
+      padding: 0 var(--s2);
+      height: 40px;
+      transition: all var(--dur) var(--ease);
       flex-shrink: 0;
-      cursor: pointer;
     }
 
-    .prog-dot {
-      width: 6px;
-      height: 6px;
-      border-radius: 50%;
-      background: rgba(255, 255, 255, 0.15);
-      border: 1px solid rgba(255, 255, 255, 0.2);
-      transition: all 0.25s;
+    .c-seqbar__num {
+      font-family: var(--font-mono);
+      font-size: 10px;
+      letter-spacing: 0.06em;
+      color: var(--fg-3);
+      transition: color var(--dur) var(--ease);
+      line-height: 1;
     }
 
-    .prog-label {
-      font-family: var(--mono);
+    .c-seqbar__label {
+      font-family: var(--font-mono);
       font-size: 10px;
       letter-spacing: 0.08em;
-      color: var(--muted);
-      transition: color 0.25s;
+      color: var(--fg-3);
+      transition: color var(--dur) var(--ease);
       white-space: nowrap;
     }
 
-    .prog-item:hover .prog-dot {
-      background: var(--text);
-      border-color: var(--text);
+    .c-seqbar__item:hover .c-seqbar__num,
+    .c-seqbar__item:hover .c-seqbar__label {
+      color: var(--fg-1);
     }
 
-    .prog-item:hover .prog-label {
-      color: var(--text);
-    }
-
-    .prog-item.active .prog-dot {
-      background: var(--accent);
-      border-color: var(--accent);
-      box-shadow: 0 0 8px rgba(200, 240, 160, 0.5);
-    }
-
-    .prog-item.active .prog-label {
+    .c-seqbar__item.active .c-seqbar__num {
       color: var(--accent);
     }
 
-    .prog-line {
+    .c-seqbar__item.active .c-seqbar__label {
+      color: var(--fg-1);
+    }
+
+    .c-seqbar__line {
       flex: 1;
       height: 1px;
       background: var(--border);
-      margin-bottom: 1.15rem;
-      min-width: 1rem;
+      min-width: var(--s3);
     }
 
-    /* HERO */
-    .hero {
+    /* ── COMPONENT: HERO ─────────────────────────────────────── */
+    .c-hero {
       min-height: 100vh;
+      padding: calc(56px + 40px + var(--s16)) var(--s6) var(--s16);
       display: flex;
-      flex-direction: column;
-      justify-content: center;
-      padding: 7rem 3rem 6rem;
+      align-items: center;
       position: relative;
       overflow: hidden;
     }
 
-    .hero::before {
+    /* Layer 0 — background ghost mark */
+    .c-hero__ghost {
+      position: absolute;
+      right: -0.04em;
+      bottom: -0.12em;
+      font-family: var(--font-mono);
+      font-size: clamp(180px, 22vw, 320px);
+      font-weight: 500;
+      letter-spacing: -0.04em;
+      color: transparent;
+      -webkit-text-stroke: 1px rgba(255, 255, 255, 0.035);
+      user-select: none;
+      pointer-events: none;
+      line-height: 1;
+      z-index: 0;
+    }
+
+    /* Layer 0 — dot grid */
+    .c-hero::before {
       content: '';
       position: absolute;
-      top: -20%;
-      right: -10%;
-      width: 600px;
-      height: 600px;
-      border-radius: 50%;
-      background: radial-gradient(circle, rgba(200, 240, 160, 0.06) 0%, transparent 70%);
+      inset: 0;
+      z-index: 0;
+      background-image: radial-gradient(circle, rgba(255, 255, 255, 0.055) 1px, transparent 1px);
+      background-size: 32px 32px;
+      mask-image: radial-gradient(ellipse 70% 80% at 70% 40%, black 0%, transparent 100%);
+      -webkit-mask-image: radial-gradient(ellipse 70% 80% at 70% 40%, black 0%, transparent 100%);
       pointer-events: none;
     }
 
-    .hero-content {
+    /* Layer 1 — content */
+    .c-hero__inner {
       display: flex;
-      align-items: center;
+      align-items: flex-start;
       justify-content: space-between;
-      gap: 4rem;
-      max-width: 1200px;
-      margin: 0 auto;
+      gap: var(--s8);
+      max-width: 1280px;
       width: 100%;
+      margin: 0 auto;
+      position: relative;
+      z-index: 1;
     }
 
-    .hero-text {
+    .c-hero__text {
       flex: 1;
-      animation: fadeUp 0.6s ease both;
+      animation: fadeUp 0.7s var(--ease) both;
     }
 
-    .hero-image {
-      flex-shrink: 0;
-      animation: fadeUp 0.6s 0.3s ease both;
-    }
-
-    .hero-image img {
-      width: 300px;
-      height: 380px;
-      object-fit: cover;
-      object-position: center top;
-      border-radius: 160px;
-      border: 1px solid var(--border);
-      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.5);
-    }
-
-    .hero-label {
-      font-family: var(--mono);
-      font-size: 12px;
-      letter-spacing: 0.15em;
+    .c-hero__eyebrow {
+      font-family: var(--font-mono);
+      font-size: var(--t-xs);
+      letter-spacing: 0.16em;
       color: var(--accent);
       text-transform: uppercase;
-      margin-bottom: 1.5rem;
-    }
-
-    .hero h1 {
-      font-family: var(--serif);
-      font-size: clamp(3rem, 7vw, 5.5rem);
-      font-weight: 400;
-      line-height: 1.1;
-      letter-spacing: -0.01em;
-      margin-bottom: 2.5rem;
-      max-width: 900px;
-    }
-
-    .hero h1 em {
-      font-style: italic;
-      color: var(--muted);
-      font-size: 0.8em;
-      display: block;
-      margin-top: 0.2rem;
-    }
-
-    .hero-meta {
-      display: flex;
-      gap: 3.5rem;
-      flex-wrap: wrap;
-    }
-
-    .hero-meta-item {
-      display: flex;
-      flex-direction: column;
-      gap: 0.4rem;
-    }
-
-    .hero-meta-label {
-      font-family: var(--mono);
-      font-size: 10px;
-      letter-spacing: 0.12em;
-      text-transform: uppercase;
-      color: var(--muted);
-    }
-
-    .hero-meta-value {
-      font-size: 14px;
-      font-weight: 400;
-      color: var(--text);
-    }
-
-    /* SECTIONS */
-    section {
-      padding: 6rem 3rem;
-      border-top: 1px solid var(--border);
-      max-width: 1200px;
-      margin: 0 auto;
-      scroll-margin-top: 110px;
-    }
-
-    .section-label {
-      font-family: var(--mono);
-      font-size: 12px;
-      letter-spacing: 0.15em;
-      text-transform: uppercase;
-      color: var(--muted);
-      margin-bottom: 3.5rem;
+      margin-bottom: var(--s3);
       display: flex;
       align-items: center;
-      gap: 1.5rem;
+      gap: var(--s2);
     }
 
-    .section-label::after {
+    .c-hero__eyebrow::before {
       content: '';
+      display: block;
+      width: 20px;
+      height: 1px;
+      background: var(--accent);
+    }
+
+    .c-hero__name {
+      font-family: var(--font-sans);
+      font-size: clamp(var(--t-2xl), 6vw, var(--t-3xl));
+      font-weight: 300;
+      line-height: 1.08;
+      letter-spacing: -0.02em;
+      color: var(--fg-1);
+      margin-bottom: var(--s6);
+    }
+
+    .c-hero__name span {
+      display: block;
+      font-weight: 500;
+    }
+
+    .c-hero__name em {
+      font-style: normal;
+      color: var(--fg-2);
+      font-size: 0.72em;
+      font-weight: 300;
+      letter-spacing: 0.01em;
+    }
+
+    .c-hero__meta {
+      display: grid;
+      grid-template-columns: repeat(3, auto);
+      gap: var(--s1) var(--s8);
+      width: fit-content;
+      padding-top: var(--s5);
+      border-top: 1px solid var(--border);
+    }
+
+    .c-hero__meta-label {
+      font-family: var(--font-mono);
+      font-size: 10px;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--fg-3);
+      padding-bottom: var(--s1);
+    }
+
+    .c-hero__meta-value {
+      font-size: var(--t-sm);
+      color: var(--fg-1);
+    }
+
+    /* Photo with registration marks */
+    .c-hero__photo-wrap {
+      position: relative;
+      flex-shrink: 0;
+      animation: fadeUp 0.7s 0.2s var(--ease) both;
+    }
+
+    .c-hero__photo-frame {
+      position: relative;
+      width: 280px;
+    }
+
+    .c-hero__photo-frame img {
+      display: block;
+      width: 280px;
+      height: 360px;
+      object-fit: cover;
+      object-position: center top;
+      border: 1px solid var(--border-2);
+      filter: grayscale(15%) contrast(1.02);
+    }
+
+    /* Registration marks — corners */
+    .c-hero__photo-frame::before,
+    .c-hero__photo-frame::after,
+    .c-hero__photo-frame .c-reg-tl,
+    .c-hero__photo-frame .c-reg-br {
+      content: '';
+      position: absolute;
+      width: 14px;
+      height: 14px;
+      border-color: var(--accent);
+      border-style: solid;
+      border-width: 0;
+      pointer-events: none;
+      z-index: 2;
+    }
+
+    .c-hero__photo-frame .c-reg-tl {
+      top: -4px;
+      left: -4px;
+      border-top-width: 1px;
+      border-left-width: 1px;
+    }
+
+    .c-hero__photo-frame::before {
+      top: -4px;
+      right: -4px;
+      border-top-width: 1px;
+      border-right-width: 1px;
+    }
+
+    .c-hero__photo-frame::after {
+      bottom: -4px;
+      left: -4px;
+      border-bottom-width: 1px;
+      border-left-width: 1px;
+    }
+
+    .c-hero__photo-frame .c-reg-br {
+      bottom: -4px;
+      right: -4px;
+      border-bottom-width: 1px;
+      border-right-width: 1px;
+    }
+
+    .c-hero__photo-label {
+      font-family: var(--font-mono);
+      font-size: 9px;
+      letter-spacing: 0.1em;
+      color: var(--fg-3);
+      text-align: right;
+      margin-top: var(--s2);
+      text-transform: uppercase;
+    }
+
+    /* ── COMPONENT: SECTION ──────────────────────────────────── */
+    .c-section {
+      padding: var(--s12) var(--s6);
+      max-width: 1280px;
+      margin: 0 auto;
+      scroll-margin-top: 104px;
+      border-top: 1px solid var(--border);
+    }
+
+    .c-section__header {
+      display: flex;
+      align-items: baseline;
+      gap: var(--s3);
+      margin-bottom: var(--s10);
+    }
+
+    .c-section__index {
+      font-family: var(--font-mono);
+      font-size: var(--t-xs);
+      color: var(--accent);
+      letter-spacing: 0.06em;
+      flex-shrink: 0;
+      line-height: 1;
+      position: relative;
+      top: -1px;
+    }
+
+    .c-section__title {
+      font-family: var(--font-mono);
+      font-size: var(--t-xs);
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--fg-2);
+      flex-shrink: 0;
+    }
+
+    .c-section__rule {
       flex: 1;
       height: 1px;
       background: var(--border);
-      max-width: 100px;
     }
 
-    /* RESEARCH / COMPETENCIES */
-    .research-grid {
+    /* ── COMPONENT: COMPETENCY CARDS ─────────────────────────── */
+    .c-cards {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
-      gap: 1px;
-      background: var(--border);
+      grid-template-columns: repeat(4, 1fr);
+      border: 1px solid var(--border);
     }
 
-    .research-card {
-      background: var(--bg);
-      padding: 2.5rem;
-      transition: background 0.2s;
-    }
-
-    .research-card:hover {
-      background: var(--surface);
-    }
-
-    .research-card {
+    .c-card {
+      padding: var(--s5) var(--s4);
+      border-right: 1px solid var(--border);
       display: flex;
       flex-direction: column;
+      background: var(--surface-1);
+      transition: background var(--dur) var(--ease);
+      position: relative;
     }
 
-    .research-card h3 {
-      font-size: 1.3rem;
+    .c-card:last-child {
+      border-right: none;
+    }
+
+    .c-card:hover {
+      background: var(--surface-2);
+    }
+
+    .c-card__index {
+      font-family: var(--font-mono);
+      font-size: 10px;
+      color: var(--fg-3);
+      letter-spacing: 0.08em;
+      margin-bottom: var(--s3);
+    }
+
+    .c-card__title {
+      font-size: var(--t-md);
       font-weight: 500;
-      margin-bottom: 1rem;
-      color: white;
-      min-height: 4.6rem;
+      color: var(--fg-1);
+      line-height: 1.4;
+      margin-bottom: var(--s3);
+      min-height: 4.8rem;
       display: flex;
       align-items: flex-start;
     }
 
-    .research-card p {
-      font-size: 14px;
-      color: var(--muted);
-      line-height: 1.6;
+    .c-card__body {
+      font-size: var(--t-sm);
+      color: var(--fg-2);
+      line-height: 1.65;
+      flex: 1;
     }
 
-    /* EXPERIENCE & EDUCATION */
-    .exp-list {
+    /* accent line on hover */
+    .c-card::after {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 2px;
+      background: var(--accent);
+      transform: scaleX(0);
+      transform-origin: left;
+      transition: transform var(--dur) var(--ease);
+    }
+
+    .c-card:hover::after {
+      transform: scaleX(1);
+    }
+
+    /* ── COMPONENT: TIMELINE ITEM ────────────────────────────── */
+    .c-timeline {
       display: flex;
       flex-direction: column;
     }
 
-    .exp-item {
+    .c-timeline__item {
       display: grid;
-      grid-template-columns: 220px 1fr;
-      gap: 3rem;
-      padding: 3rem 0;
+      grid-template-columns: 200px 1fr;
+      gap: var(--s8);
+      padding: var(--s8) 0;
       border-bottom: 1px solid var(--border);
+      position: relative;
     }
 
-    .exp-item:first-child {
+    .c-timeline__item:first-child {
       border-top: 1px solid var(--border);
     }
 
-    .exp-left {
-      padding-top: 0.2rem;
+    .c-timeline__left {
+      padding-top: 3px;
     }
 
-    .exp-company {
-      font-family: var(--mono);
-      font-size: 13px;
-      letter-spacing: 0.05em;
-      color: var(--accent2);
-      margin-bottom: 0.4rem;
+    .c-timeline__org {
+      font-family: var(--font-mono);
+      font-size: var(--t-xs);
+      letter-spacing: 0.07em;
+      color: var(--accent-2);
+      margin-bottom: var(--s1);
+      text-transform: uppercase;
     }
 
-    .exp-period {
-      font-size: 13px;
-      color: var(--muted);
+    .c-timeline__period {
+      font-family: var(--font-mono);
+      font-size: var(--t-xs);
+      color: var(--fg-3);
+      line-height: 1.8;
+      letter-spacing: 0.04em;
     }
 
-    .exp-right h3 {
-      font-size: 1.4rem;
+    .c-timeline__title {
+      font-size: var(--t-lg);
       font-weight: 500;
-      margin-bottom: 1rem;
-      color: white;
+      color: var(--fg-1);
+      margin-bottom: var(--s3);
+      line-height: 1.35;
     }
 
-    .exp-right p {
-      font-size: 15px;
-      color: var(--muted);
+    .c-timeline__body {
+      font-size: var(--t-base);
+      color: var(--fg-2);
       line-height: 1.7;
-      margin-bottom: 1.2rem;
+      margin-bottom: var(--s3);
     }
 
-    .exp-right ul {
+    .c-timeline__list {
       list-style: none;
-      margin-bottom: 1.5rem;
+      margin-bottom: var(--s4);
     }
 
-    .exp-right ul li {
-      font-size: 15px;
-      margin-bottom: 0.8rem;
+    .c-timeline__list li {
+      font-size: var(--t-base);
+      color: var(--fg-1);
+      padding-left: var(--s3);
       position: relative;
-      padding-left: 1rem;
-      color: var(--text);
+      margin-bottom: var(--s2);
+      line-height: 1.65;
     }
 
-    .exp-right ul li::before {
-      content: '・';
+    .c-timeline__list li::before {
+      content: '—';
       position: absolute;
       left: 0;
       color: var(--accent);
+      font-family: var(--font-mono);
+      font-size: 12px;
     }
 
-    .tags {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 0.6rem;
+    .c-timeline__list strong {
+      font-weight: 500;
+      color: var(--fg-1);
     }
 
-    .tag {
-      font-family: var(--mono);
-      font-size: 11px;
-      letter-spacing: 0.03em;
-      padding: 0.35rem 0.85rem;
-      border: 1px solid var(--border);
-      border-radius: 100px;
-      color: var(--muted);
-    }
-
-    /* AWARD BADGE */
-    .award-badge {
+    /* ── COMPONENT: AWARD BADGE ──────────────────────────────── */
+    .c-award {
       display: inline-flex;
       align-items: center;
-      gap: 0.4rem;
-      font-family: var(--mono);
+      gap: var(--s1);
+      font-family: var(--font-mono);
       font-size: 11px;
-      letter-spacing: 0.06em;
-      padding: 0.3rem 0.75rem;
-      background: rgba(160, 212, 240, 0.08);
-      border: 1px solid rgba(160, 212, 240, 0.25);
-      color: var(--accent2);
-      border-radius: 6px;
-      margin-bottom: 1rem;
+      letter-spacing: 0.07em;
+      padding: 4px 10px;
+      background: var(--accent-2-dim);
+      border: 1px solid rgba(85, 184, 226, 0.22);
+      color: var(--accent-2);
+      margin-bottom: var(--s3);
+      text-transform: uppercase;
     }
 
-    .award-badge::before {
-      content: '🏆';
+    .c-award::before {
+      content: '↑';
       font-size: 10px;
     }
 
-    /* PUBLICATIONS */
-    .pub-item {
-      padding: 2.5rem 0;
-      border-bottom: 1px solid var(--border);
+    /* ── COMPONENT: TAGS ─────────────────────────────────────── */
+    .c-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: var(--s1);
+    }
+
+    .c-tag {
+      font-family: var(--font-mono);
+      font-size: 10px;
+      letter-spacing: 0.04em;
+      padding: 4px 10px;
+      border: 1px solid var(--border-2);
+      border-radius: 4px;
+      color: var(--fg-3);
+      background: var(--surface-2);
+    }
+
+    /* ── COMPONENT: PUBLICATION ──────────────────────────────── */
+    .c-pub {
       display: grid;
-      grid-template-columns: auto 1fr;
-      gap: 2rem;
+      grid-template-columns: 100px 1fr;
+      gap: var(--s6);
+      padding: var(--s6) 0;
+      border-bottom: 1px solid var(--border);
       align-items: start;
     }
 
-    .pub-item:first-child {
+    .c-pub:first-child {
       border-top: 1px solid var(--border);
     }
 
-    .pub-badge {
-      font-family: var(--mono);
-      font-size: 12px;
+    .c-pub__badge {
+      font-family: var(--font-mono);
+      font-size: 11px;
       letter-spacing: 0.08em;
-      padding: 0.35rem 0.8rem;
-      background: rgba(200, 240, 160, 0.08);
-      border: 1px solid rgba(200, 240, 160, 0.2);
+      padding: 5px 10px;
+      background: var(--accent-dim);
+      border: 1px solid rgba(168, 216, 78, 0.2);
       color: var(--accent);
-      border-radius: 6px;
+      text-align: center;
       white-space: nowrap;
-      margin-top: 0.2rem;
+      margin-top: 3px;
     }
 
-    .pub-title {
-      font-size: 1.2rem;
+    .c-pub__title {
+      font-size: var(--t-lg);
       font-weight: 500;
-      margin-bottom: 0.6rem;
-      color: white;
+      color: var(--fg-1);
+      margin-bottom: var(--s2);
+      line-height: 1.4;
     }
 
-    .pub-meta {
-      font-size: 14px;
-      color: var(--muted);
-      line-height: 1.6;
+    .c-pub__subtitle {
+      font-size: var(--t-sm);
+      font-weight: 300;
+      color: var(--fg-2);
+      margin-bottom: var(--s2);
+      line-height: 1.55;
+      font-style: italic;
     }
 
-    /* SKILLS */
-    .skills-table {
+    .c-pub__meta {
+      font-family: var(--font-mono);
+      font-size: var(--t-xs);
+      color: var(--fg-3);
+      letter-spacing: 0.04em;
+    }
+
+    /* ── COMPONENT: SKILLS TABLE ─────────────────────────────── */
+    .c-skills-grid {
       display: grid;
       grid-template-columns: 1fr 1fr;
-      column-gap: 6rem;
-      row-gap: 0;
-      margin-bottom: 3.5rem;
+      column-gap: var(--s16);
+      margin-bottom: var(--s10);
     }
 
-    .skills-col-header {
-      font-family: var(--mono);
-      font-size: 12px;
-      letter-spacing: 0.1em;
+    .c-skills-col-head {
+      font-family: var(--font-mono);
+      font-size: var(--t-xs);
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
       color: var(--accent);
-      padding-bottom: 1.2rem;
+      padding-bottom: var(--s3);
     }
 
-    .skill-row-item {
-      font-size: 15px;
-      color: var(--text);
+    .c-skill-row,
+    .c-tool-row {
+      font-size: var(--t-base);
+      color: var(--fg-1);
       display: flex;
       align-items: center;
-      gap: 0.75rem;
-      padding: 0.55rem 0;
+      gap: var(--s2);
+      padding: var(--s2) 0 calc(var(--s2) - 1px);
       border-top: 1px solid var(--border);
     }
 
-    .dot {
-      width: 4px;
-      height: 4px;
+    .c-skill-dot {
+      width: 3px;
+      height: 3px;
       border-radius: 50%;
-      background: var(--muted);
+      background: var(--fg-3);
       flex-shrink: 0;
     }
 
-    .tool-row-item {
-      font-size: 15px;
-      color: var(--text);
-      display: flex;
-      align-items: center;
-      gap: 0.75rem;
-      padding: 0.55rem 0;
-      border-top: 1px solid var(--border);
-    }
-
-    .tool-label {
-      font-size: 12px;
-      color: var(--muted);
-      font-family: var(--mono);
+    .c-tool-label {
+      font-family: var(--font-mono);
+      font-size: 11px;
+      color: var(--fg-3);
       white-space: nowrap;
+      flex-shrink: 0;
     }
 
-    .tool-label::after {
-      content: ' :';
+    .c-tool-label::after {
+      content: ':';
+      margin-left: 1px;
     }
 
-    .cert-section {
-      padding-top: 3rem;
+    .c-tool-value {
+      color: var(--fg-2);
+    }
+
+    /* ── COMPONENT: CERT LIST ────────────────────────────────── */
+    .c-cert-block {
+      padding-top: var(--s8);
       border-top: 1px solid var(--border);
     }
 
-    .cert-header {
-      font-family: var(--mono);
-      font-size: 12px;
-      letter-spacing: 0.1em;
+    .c-cert-head {
+      font-family: var(--font-mono);
+      font-size: var(--t-xs);
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
       color: var(--accent);
-      margin-bottom: 1.2rem;
+      margin-bottom: var(--s4);
     }
 
-    .cert-list {
+    .c-cert-list {
       list-style: none;
       display: flex;
       flex-direction: column;
-      gap: 0.75rem;
+      gap: var(--s2);
     }
 
-    .cert-list li {
+    .c-cert-list li {
       display: flex;
       align-items: baseline;
-      gap: 1rem;
+      gap: var(--s3);
       flex-wrap: wrap;
+      padding: var(--s2) 0;
+      border-bottom: 1px solid var(--border);
     }
 
-    .cert-list strong {
-      font-size: 15px;
+    .c-cert-list strong {
+      font-size: var(--t-base);
       font-weight: 500;
-      color: var(--text);
+      color: var(--fg-1);
     }
 
-    .cert-meta {
-      font-size: 12px;
-      color: var(--muted);
-      font-family: var(--mono);
-      letter-spacing: 0.03em;
+    .c-cert-meta {
+      font-family: var(--font-mono);
+      font-size: 11px;
+      color: var(--fg-3);
+      letter-spacing: 0.04em;
     }
 
-    /* FOOTER */
-    footer {
+    /* ── COMPONENT: FOOTER ───────────────────────────────────── */
+    .c-footer {
       border-top: 1px solid var(--border);
-      padding: 3rem;
-      max-width: 1200px;
+      padding: var(--s6);
+      max-width: 1280px;
       margin: 0 auto;
       display: flex;
       justify-content: space-between;
       align-items: center;
       flex-wrap: wrap;
-      gap: 1.5rem;
+      gap: var(--s3);
     }
 
-    footer p {
-      font-size: 13px;
-      color: var(--muted);
-      font-family: var(--mono);
+    .c-footer__copy {
+      font-family: var(--font-mono);
+      font-size: var(--t-xs);
+      color: var(--fg-3);
+      letter-spacing: 0.08em;
     }
 
-    .contact-links {
+    .c-footer__links {
       display: flex;
-      gap: 2.5rem;
+      gap: var(--s5);
     }
 
-    .contact-links a {
-      font-size: 14px;
-      color: var(--muted);
-      font-family: var(--mono);
-      letter-spacing: 0.05em;
-      transition: color 0.2s;
+    .c-footer__link {
+      font-family: var(--font-mono);
+      font-size: var(--t-xs);
+      color: var(--fg-3);
+      letter-spacing: 0.08em;
+      transition: color var(--dur) var(--ease);
+      text-transform: uppercase;
     }
 
-    .contact-links a:hover {
+    .c-footer__link:hover {
       color: var(--accent);
     }
 
-    /* ANIMATIONS */
+    /* ── ANIMATION ───────────────────────────────────────────── */
     @keyframes fadeUp {
       from {
         opacity: 0;
-        transform: translateY(24px);
+        transform: translateY(20px);
       }
 
       to {
@@ -633,61 +871,88 @@
       }
     }
 
-    /* RESPONSIVE */
+    /* ── RESPONSIVE ──────────────────────────────────────────── */
+    @media (max-width: 960px) {
+      .c-cards {
+        grid-template-columns: repeat(2, 1fr);
+      }
+
+      .c-card {
+        border-right: none;
+        border-bottom: 1px solid var(--border);
+      }
+
+      .c-card:nth-child(odd) {
+        border-right: 1px solid var(--border);
+      }
+    }
+
     @media (max-width: 768px) {
-      nav {
-        padding: 1rem 1.5rem;
+      .c-nav {
+        padding: 0 var(--s3);
       }
 
-      .nav-links {
+      .c-nav__links {
         display: none;
       }
 
-      .section-progress {
-        padding: 0.6rem 1.5rem;
+      .c-seqbar {
+        padding: 0 var(--s3);
       }
 
-      .prog-label {
+      .c-seqbar__label {
         display: none;
       }
 
-      .hero {
-        padding: 7rem 1.5rem 4rem;
+      .c-hero {
+        padding: calc(56px + 40px + var(--s10)) var(--s3) var(--s10);
       }
 
-      .hero-content {
+      .c-hero__inner {
         flex-direction: column-reverse;
-        align-items: flex-start;
-        gap: 3rem;
+        gap: var(--s5);
       }
 
-      .hero-image img {
+      .c-hero__photo-frame {
+        width: 160px;
+      }
+
+      .c-hero__photo-frame img {
         width: 160px;
         height: 200px;
       }
 
-      section {
-        padding: 5rem 1.5rem;
+      .c-hero__meta {
+        grid-template-columns: 1fr 1fr;
+        gap: var(--s2) var(--s5);
       }
 
-      .exp-item {
+      .c-section {
+        padding: var(--s10) var(--s3);
+      }
+
+      .c-timeline__item {
         grid-template-columns: 1fr;
-        gap: 1rem;
-        padding: 2.5rem 0;
+        gap: var(--s3);
+        padding: var(--s5) 0;
       }
 
-      .pub-item {
+      .c-pub {
         grid-template-columns: 1fr;
-        gap: 1rem;
+        gap: var(--s2);
       }
 
-      .skills-table {
+      .c-skills-grid {
         grid-template-columns: 1fr;
         column-gap: 0;
       }
 
-      footer {
-        padding: 2rem 1.5rem;
+      .c-cards {
+        grid-template-columns: 1fr;
+      }
+
+      .c-card:nth-child(odd) {
+        border-right: none;
       }
     }
   </style>
@@ -695,149 +960,175 @@
 
 <body>
 
-  <nav>
-    <span class="nav-logo">CSJ — Portfolio</span>
-    <ul class="nav-links">
-      <li><a href="#competencies">역량</a></li>
-      <li><a href="#education">학력</a></li>
-      <li><a href="#experience">경력</a></li>
-      <li><a href="#projects">프로젝트</a></li>
-      <li><a href="#publications">연구 실적</a></li>
-      <li><a href="#skills">스킬 및 자격증</a></li>
+  <!-- NAV -->
+  <nav class="c-nav">
+    <div class="c-nav__logo">
+      <span class="c-nav__logo-dot"></span>
+      CSJ — Portfolio
+    </div>
+    <ul class="c-nav__links">
+      <li><a href="#competencies">01 역량</a></li>
+      <li><a href="#education">02 학력</a></li>
+      <li><a href="#experience">03 경력</a></li>
+      <li><a href="#projects">04 프로젝트</a></li>
+      <li><a href="#publications">05 연구</a></li>
+      <li><a href="#skills">06 스킬</a></li>
     </ul>
   </nav>
 
-  <div class="section-progress">
-    <div class="progress-inner">
-      <a href="#competencies" class="prog-item" data-section="competencies">
-        <span class="prog-dot"></span>
-        <span class="prog-label">역량</span>
+  <!-- SECTION PROGRESS -->
+  <div class="c-seqbar">
+    <div class="c-seqbar__inner">
+      <a href="#competencies" class="c-seqbar__item" data-section="competencies">
+        <span class="c-seqbar__num">01</span>
+        <span class="c-seqbar__label">역량</span>
       </a>
-      <span class="prog-line"></span>
-      <a href="#education" class="prog-item" data-section="education">
-        <span class="prog-dot"></span>
-        <span class="prog-label">학력</span>
+      <span class="c-seqbar__line"></span>
+      <a href="#education" class="c-seqbar__item" data-section="education">
+        <span class="c-seqbar__num">02</span>
+        <span class="c-seqbar__label">학력</span>
       </a>
-      <span class="prog-line"></span>
-      <a href="#experience" class="prog-item" data-section="experience">
-        <span class="prog-dot"></span>
-        <span class="prog-label">경력</span>
+      <span class="c-seqbar__line"></span>
+      <a href="#experience" class="c-seqbar__item" data-section="experience">
+        <span class="c-seqbar__num">03</span>
+        <span class="c-seqbar__label">경력</span>
       </a>
-      <span class="prog-line"></span>
-      <a href="#projects" class="prog-item" data-section="projects">
-        <span class="prog-dot"></span>
-        <span class="prog-label">프로젝트</span>
+      <span class="c-seqbar__line"></span>
+      <a href="#projects" class="c-seqbar__item" data-section="projects">
+        <span class="c-seqbar__num">04</span>
+        <span class="c-seqbar__label">프로젝트</span>
       </a>
-      <span class="prog-line"></span>
-      <a href="#publications" class="prog-item" data-section="publications">
-        <span class="prog-dot"></span>
-        <span class="prog-label">연구 실적</span>
+      <span class="c-seqbar__line"></span>
+      <a href="#publications" class="c-seqbar__item" data-section="publications">
+        <span class="c-seqbar__num">05</span>
+        <span class="c-seqbar__label">연구 실적</span>
       </a>
-      <span class="prog-line"></span>
-      <a href="#skills" class="prog-item" data-section="skills">
-        <span class="prog-dot"></span>
-        <span class="prog-label">스킬 & 자격증</span>
+      <span class="c-seqbar__line"></span>
+      <a href="#skills" class="c-seqbar__item" data-section="skills">
+        <span class="c-seqbar__num">06</span>
+        <span class="c-seqbar__label">스킬 & 자격증</span>
       </a>
     </div>
   </div>
 
-  <div class="hero">
-    <div class="hero-content">
-      <div class="hero-text">
-        <div class="hero-label">UX Researcher · Human-AI Interaction</div>
-        <h1>최성준<br>Choi SeongJoon</h1>
-        <div class="hero-meta">
-          <div class="hero-meta-item">
-            <span class="hero-meta-label">소속 (Affiliation)</span>
-            <span class="hero-meta-value">성균관대학교(SKKU) HAI LAB 석사과정</span>
-          </div>
-          <div class="hero-meta-item">
-            <span class="hero-meta-label">교환학생 (Exchange)</span>
-            <span class="hero-meta-value">싱가포르 난양공과대학교(NTU) WKWSCI</span>
-          </div>
-          <div class="hero-meta-item">
-            <span class="hero-meta-label">핵심 관심 (Focus)</span>
-            <span class="hero-meta-value">AI 신뢰 및 안전성 · HCI · UX 리서치</span>
-          </div>
+  <!-- HERO -->
+  <div class="c-hero">
+    <div class="c-hero__ghost" aria-hidden="true">UXR</div>
+    <div class="c-hero__inner">
+      <div class="c-hero__text">
+        <div class="c-hero__eyebrow">UX Researcher · Human-AI Interaction</div>
+        <h1 class="c-hero__name">
+          <span>최성준</span>
+          <em>Choi SeongJoon</em>
+        </h1>
+        <div class="c-hero__meta">
+          <span class="c-hero__meta-label">소속</span>
+          <span class="c-hero__meta-label">교환학생</span>
+          <span class="c-hero__meta-label">관심 분야</span>
+          <span class="c-hero__meta-value">SKKU HAI Lab 석사과정</span>
+          <span class="c-hero__meta-value">NTU WKWSCI, Singapore</span>
+          <span class="c-hero__meta-value">AI Trust · HCI · UX Research</span>
         </div>
       </div>
-      <div class="hero-image">
-        <img src="assets/9A1D5D6C-D54C-437A-A0B9-BF434BA5EEDC.jpg" alt="Choi SeongJoon 프로필 사진">
+      <div class="c-hero__photo-wrap">
+        <div class="c-hero__photo-frame">
+          <span class="c-reg-tl"></span>
+          <span class="c-reg-br"></span>
+          <img src="assets/9A1D5D6C-D54C-437A-A0B9-BF434BA5EEDC.jpg" alt="Choi SeongJoon">
+        </div>
+        <p class="c-hero__photo-label">Choi SeongJoon · 2026</p>
       </div>
     </div>
   </div>
 
-  <section id="competencies">
-    <div class="section-label">핵심 역량 및 관심 분야 (Competencies)</div>
-    <div class="research-grid">
-      <div class="research-card">
-        <h3>인간-AI 상호작용 설계</h3>
-        <p>프로덕트와 서비스 환경에서 사용자가 AI 시스템과 어떻게 신뢰를 형성하고 의존하며, 데이터를 해석하는지에 대한 사용자 경험(UX) 최적화 방법론을 연구합니다.</p>
+  <!-- 01 COMPETENCIES -->
+  <section class="c-section" id="competencies">
+    <div class="c-section__header">
+      <span class="c-section__index">01</span>
+      <span class="c-section__title">핵심 역량 및 관심 분야 (Competencies)</span>
+      <span class="c-section__rule"></span>
+    </div>
+    <div class="c-cards">
+      <div class="c-card">
+        <div class="c-card__index">01 / 04</div>
+        <h3 class="c-card__title">인간-AI 상호작용 설계</h3>
+        <p class="c-card__body">프로덕트와 서비스 환경에서 사용자가 AI 시스템과 어떻게 신뢰를 형성하고 의존하며, 데이터를 해석하는지에 대한 사용자 경험(UX) 최적화 방법론을 연구합니다.
+        </p>
       </div>
-      <div class="research-card">
-        <h3>AI 서비스 경험 및 안전성 개선</h3>
-        <p>AI의 거절 전략(Refusal Strategies), 투명성 확보, 출처 표기가 사용자 행동 지표 및 인지된 안전성에 미치는 영향을 분석하여 실질적인 프로덕트 개선에 기여합니다.</p>
+      <div class="c-card">
+        <div class="c-card__index">02 / 04</div>
+        <h3 class="c-card__title">AI 서비스 경험 및 안전성 개선</h3>
+        <p class="c-card__body">AI의 거절 전략(Refusal Strategies), 투명성 확보, 출처 표기가 사용자 행동 지표 및 인지된 안전성에 미치는 영향을 분석하여 실질적인
+          프로덕트 개선에 기여합니다.</p>
       </div>
-      <div class="research-card">
-        <h3>사용자 중심 UX 리서치</h3>
-        <p>정량적 데이터 분석(SQL, 구조화 설문 등)과 정성적 방법론(심층 인터뷰, 사용성 테스트 등)을 결합하여, AI 네이티브 프로덕트에 즉각 적용할 수 있는 액셔너블한 인사이트를 도출합니다.</p>
+      <div class="c-card">
+        <div class="c-card__index">03 / 04</div>
+        <h3 class="c-card__title">사용자 중심 UX 리서치</h3>
+        <p class="c-card__body">정량적 데이터 분석(SQL, 구조화 설문 등)과 정성적 방법론(심층 인터뷰, 사용성 테스트 등)을 결합하여, AI 네이티브 프로덕트에 즉각 적용할 수 있는
+          액셔너블한 인사이트를 도출합니다.</p>
       </div>
-      <div class="research-card">
-        <h3>대화형/생성형 AI 인터랙션</h3>
-        <p>사용자 프롬프팅 최적화와 모달리티(Voice/Text) 및 응답 구조의 차이가 전체 인터페이스와 사용자 만족도에 미치는 영향을 탐구하고 기획합니다.</p>
+      <div class="c-card">
+        <div class="c-card__index">04 / 04</div>
+        <h3 class="c-card__title">대화형/생성형 AI 인터랙션</h3>
+        <p class="c-card__body">사용자 프롬프팅 최적화와 모달리티(Voice/Text) 및 응답 구조의 차이가 전체 인터페이스와 사용자 만족도에 미치는 영향을 탐구하고 기획합니다.</p>
       </div>
     </div>
   </section>
 
-  <section id="education">
-    <div class="section-label">학력 (Education)</div>
-    <div class="exp-list">
+  <!-- 02 EDUCATION -->
+  <section class="c-section" id="education">
+    <div class="c-section__header">
+      <span class="c-section__index">02</span>
+      <span class="c-section__title">학력 (Education)</span>
+      <span class="c-section__rule"></span>
+    </div>
+    <div class="c-timeline">
 
-      <div class="exp-item">
-        <div class="exp-left">
-          <div class="exp-company">성균관대학교 (SKKU)</div>
-          <div class="exp-period">2025.09 – 현재<br>석사과정 재학</div>
+      <div class="c-timeline__item">
+        <div class="c-timeline__left">
+          <div class="c-timeline__org">성균관대학교 (SKKU)</div>
+          <div class="c-timeline__period">2025.09 — 현재<br>석사과정 재학</div>
         </div>
-        <div class="exp-right">
-          <h3>인터랙션 사이언스학과 (Interaction Science)</h3>
-          <p><a href="https://hailab.skku.edu/" target="_blank"
-              style="color: var(--accent2); text-decoration: underline; text-underline-offset: 3px;">Human-AI
-              Interaction Lab</a> 소속. AI 신뢰·안전성 및 HCI 방법론을 중심으로 연구 중.</p>
-          <div class="tags">
-            <span class="tag">HCI</span>
-            <span class="tag">Human-AI Interaction</span>
-            <span class="tag">HAI Lab</span>
+        <div class="c-timeline__right">
+          <h3 class="c-timeline__title">인터랙션 사이언스학과 (Interaction Science)</h3>
+          <p class="c-timeline__body"><a href="https://hailab.skku.edu/" target="_blank"
+              style="color:var(--accent-2); text-decoration:underline; text-underline-offset:3px;">Human-AI Interaction
+              Lab</a> 소속. AI 신뢰·안전성 및 HCI 방법론을 중심으로 연구 중.</p>
+          <div class="c-tags">
+            <span class="c-tag">HCI</span>
+            <span class="c-tag">Human-AI Interaction</span>
+            <span class="c-tag">HAI Lab</span>
           </div>
         </div>
       </div>
 
-      <div class="exp-item">
-        <div class="exp-left">
-          <div class="exp-company">난양공과대학교 (NTU)</div>
-          <div class="exp-period">2026.01 – 현재<br>교환학생</div>
+      <div class="c-timeline__item">
+        <div class="c-timeline__left">
+          <div class="c-timeline__org">난양공과대학교 (NTU)</div>
+          <div class="c-timeline__period">2026.01 — 현재<br>교환학생</div>
         </div>
-        <div class="exp-right">
-          <h3>Wee Kim Wee School of Communication and Information (WKWSCI)</h3>
-          <p>싱가포르 난양공과대학교 WKWSCI 석사과정 Course Work 이수 중.</p>
-          <div class="tags">
-            <span class="tag">Exchange Student</span>
-            <span class="tag">Singapore</span>
-            <span class="tag">WKWSCI</span>
+        <div class="c-timeline__right">
+          <h3 class="c-timeline__title">Wee Kim Wee School of Communication and Information (WKWSCI)</h3>
+          <p class="c-timeline__body">싱가포르 난양공과대학교 WKWSCI 교환학생 과정 이수 중.</p>
+          <div class="c-tags">
+            <span class="c-tag">Exchange Student</span>
+            <span class="c-tag">Singapore</span>
+            <span class="c-tag">WKWSCI</span>
           </div>
         </div>
       </div>
 
-      <div class="exp-item">
-        <div class="exp-left">
-          <div class="exp-company">가천대학교 (Gachon Univ.)</div>
-          <div class="exp-period">2019.03 – 2025.02<br>학사 졸업</div>
+      <div class="c-timeline__item">
+        <div class="c-timeline__left">
+          <div class="c-timeline__org">가천대학교 (Gachon Univ.)</div>
+          <div class="c-timeline__period">2019.03 — 2025.02<br>학사 졸업</div>
         </div>
-        <div class="exp-right">
-          <h3>산업경영공학과 · 소프트웨어학과 복수전공</h3>
-          <p>공학적 의사결정 방법론과 소프트웨어 역량을 결합한 융합 전공 이수.</p>
-          <div class="tags">
-            <span class="tag">Industrial & Management Engineering</span>
-            <span class="tag">Software Engineering (Double Major)</span>
+        <div class="c-timeline__right">
+          <h3 class="c-timeline__title">산업경영공학과 · 소프트웨어학과 복수전공</h3>
+          <p class="c-timeline__body">공학적 의사결정 방법론과 소프트웨어 역량을 결합한 융합 전공 이수. GPA 81.6 / 100</p>
+          <div class="c-tags">
+            <span class="c-tag">Industrial & Management Engineering</span>
+            <span class="c-tag">Software Engineering (Double Major)</span>
           </div>
         </div>
       </div>
@@ -845,75 +1136,74 @@
     </div>
   </section>
 
-  <section id="experience">
-    <div class="section-label">주요 경력 (Experience)</div>
-    <div class="exp-list">
+  <!-- 03 EXPERIENCE -->
+  <section class="c-section" id="experience">
+    <div class="c-section__header">
+      <span class="c-section__index">03</span>
+      <span class="c-section__title">주요 경력 (Experience)</span>
+      <span class="c-section__rule"></span>
+    </div>
+    <div class="c-timeline">
 
-      <div class="exp-item">
-        <div class="exp-left">
-          <div class="exp-company">성균관대학교 (SKKU)</div>
-          <div class="exp-period">2025.07 – 현재<br>Human-AI Interaction Lab<br>Researcher</div>
+      <div class="c-timeline__item">
+        <div class="c-timeline__left">
+          <div class="c-timeline__org">성균관대학교 (SKKU)</div>
+          <div class="c-timeline__period">2025.07 — 현재<br>HAI Lab<br>Researcher</div>
         </div>
-        <div class="exp-right">
-          <h3>음성 인터랙션 환경의 AI 거절 전략 연구 (CHI 2026)</h3>
-          <ul>
+        <div class="c-timeline__right">
+          <h3 class="c-timeline__title">음성 인터랙션 환경의 AI 거절 전략 연구 (CHI 2026)</h3>
+          <ul class="c-timeline__list">
             <li><strong>실험 플랫폼 직접 설계 및 구현:</strong> 텍스트·음성 모달리티와 출처 정보 조합에 따른 AI 거절 반응을 측정하기 위한 웹 기반 실험 환경을 처음부터 직접 설계하고
               개발</li>
             <li><strong>사용자 연구 운영:</strong> 144명 대상 실험의 시나리오 설계 및 참여자 리크루팅 주도 (데이터 수집까지의 파이프라인 관리)</li>
           </ul>
-          <div class="tags">
-            <span class="tag">Experiment Design</span>
-            <span class="tag">Platform Development</span>
-            <span class="tag">HCI Research</span>
+          <div class="c-tags">
+            <span class="c-tag">Experiment Design</span>
+            <span class="c-tag">Platform Development</span>
+            <span class="c-tag">HCI Research</span>
           </div>
         </div>
       </div>
 
-      <div class="exp-item">
-        <div class="exp-left">
-          <div class="exp-company">뤼튼테크놀로지스 (Wrtn)</div>
-          <div class="exp-period">2025.04 – 2025.07<br>Service Ops Manager<br>(UX Research Intern)</div>
+      <div class="c-timeline__item">
+        <div class="c-timeline__left">
+          <div class="c-timeline__org">뤼튼테크놀로지스 (Wrtn)</div>
+          <div class="c-timeline__period">2025.04 — 2025.07<br>Service Ops Manager<br>(UX Research Intern)</div>
         </div>
-        <div class="exp-right">
-          <h3>엔드투엔드(End-to-End) UX 리서치 및 고객여정 설계</h3>
-          <ul>
-            <li><strong>AI 고객지원 자동화 플로우 설계:</strong> 복잡한 서비스 로직을 직관적인 인터랙션 구조로 변환하여 유저 여정 지도를 그리고, 불필요한 UX 터치포인트를 단축시켜
-              문제 해결 속도 개선</li>
-            <li><strong>데이터 기반 리서치 운영:</strong> SQL을 활용한 빅쿼리 유저 세분화 및 카카오톡 CRM 메시지를 활용한 효율적 대상자 리크루팅 진행</li>
-            <li><strong>인사이트 도출 및 프로덕트 기획안 제안:</strong> 심층 고객 인터뷰(IDI) 데이터를 생성형 AI 플랫폼과 결합하여 분석하고, 향후 리서치 조직을 위한 사내 문서화
-              가이드라인 규격화 달성</li>
+        <div class="c-timeline__right">
+          <h3 class="c-timeline__title">End-to-End UX 리서치 및 고객여정 설계</h3>
+          <ul class="c-timeline__list">
+            <li><strong>AI 고객지원 자동화 플로우 설계:</strong> 복잡한 서비스 로직을 직관적인 인터랙션 구조로 변환하여 유저 여정 지도를 그리고, 불필요한 UX 터치포인트 단축</li>
+            <li><strong>데이터 기반 리서치 운영:</strong> SQL 빅쿼리 유저 세분화 및 카카오톡 CRM 메시지 활용한 대상자 리크루팅</li>
+            <li><strong>인사이트 도출 및 기획안 제안:</strong> 1대1 심층 인터뷰(IDI) 데이터를 생성형 AI와 결합 분석, 사내 리서치 문서화 가이드라인 규격화 달성</li>
           </ul>
-          <div class="tags">
-            <span class="tag">User Experience Research</span>
-            <span class="tag">Customer eXperience</span>
-            <span class="tag">SQL User Segmentation</span>
-            <span class="tag">Quality Assurance</span>
-            <span class="tag">User Interview</span>
+          <div class="c-tags">
+            <span class="c-tag">UX Research</span>
+            <span class="c-tag">Customer eXperience</span>
+            <span class="c-tag">SQL / BigQuery</span>
+            <span class="c-tag">User Interview</span>
           </div>
         </div>
       </div>
 
-      <div class="exp-item">
-        <div class="exp-left">
-          <div class="exp-company">곰앤컴퍼니 (GOM & Company)</div>
-          <div class="exp-period">2024.09 – 2024.12<br>Product Planning & Operation<br>Intern</div>
+      <div class="c-timeline__item">
+        <div class="c-timeline__left">
+          <div class="c-timeline__org">곰앤컴퍼니 (GOM & Co.)</div>
+          <div class="c-timeline__period">2024.09 — 2024.12<br>Product Planning &<br>Operation Intern</div>
         </div>
-        <div class="exp-right">
-          <h3>프로덕트 기획, UX 개선 및 AI 운용 업무</h3>
-          <ul>
-            <li><strong>서비스 기획 및 자동화 운영:</strong> 배너 교체 자동화 앱 기획 및 개발팀 협업을 통해 배포 → 기존 프로세스 소요시간 <strong>65% 감소</strong>
-            </li>
-            <li><strong>데이터분석 및 UX 고도화:</strong> Splunk 로그 데이터 기반 사용성 지표 분석 중 이상치 탐색으로 쿼리 오류 발견 후 수정 요청 반영 → B2C 주력 제품
-              UX 개선안 도출 및 적용, 해당 기능 리텐션 <strong>15% 이상 증가</strong></li>
-            <li><strong>AI 프롬프트 엔지니어링:</strong> 프로덕트 적용을 위한 LLM 프롬프트 작성, 테스트 베드 내 실험, 퀄리티 컨트롤 및 결과 데이터 가공</li>
+        <div class="c-timeline__right">
+          <h3 class="c-timeline__title">프로덕트 기획, UX 개선 및 AI 운용 업무</h3>
+          <ul class="c-timeline__list">
+            <li><strong>서비스 기획 및 자동화 운영:</strong> 배너 교체 자동화 앱 기획·개발팀 협업 배포 → 프로세스 소요시간 <strong>65% 감소</strong></li>
+            <li><strong>데이터분석 및 UX 고도화:</strong> Splunk 로그 이상치 탐색으로 쿼리 오류 발견 → B2C 제품 UX 개선안 적용, 리텐션 <strong>15% 이상
+                증가</strong></li>
+            <li><strong>AI 프롬프트 엔지니어링:</strong> LLM 프롬프트 작성·테스트·퀄리티 컨트롤 및 결과 데이터 가공</li>
           </ul>
-          <div class="tags">
-            <span class="tag">Product Planning</span>
-            <span class="tag">Service Operation</span>
-            <span class="tag">Process Automation</span>
-            <span class="tag">Data Analysis(Splunk)</span>
-            <span class="tag">UX Improvement</span>
-            <span class="tag">Prompt Engineering</span>
+          <div class="c-tags">
+            <span class="c-tag">Product Planning</span>
+            <span class="c-tag">Process Automation</span>
+            <span class="c-tag">Splunk</span>
+            <span class="c-tag">Prompt Engineering</span>
           </div>
         </div>
       </div>
@@ -921,117 +1211,115 @@
     </div>
   </section>
 
-  <section id="projects">
-    <div class="section-label">프로젝트 (Projects)</div>
-    <div class="exp-list">
+  <!-- 04 PROJECTS -->
+  <section class="c-section" id="projects">
+    <div class="c-section__header">
+      <span class="c-section__index">04</span>
+      <span class="c-section__title">프로젝트 (Projects)</span>
+      <span class="c-section__rule"></span>
+    </div>
+    <div class="c-timeline">
 
-      <div class="exp-item">
-        <div class="exp-left">
-          <div class="exp-company">곰앤컴퍼니</div>
-          <div class="exp-period">2024.09 – 2024.11<br>프로덕트 기획</div>
+      <div class="c-timeline__item">
+        <div class="c-timeline__left">
+          <div class="c-timeline__org">곰앤컴퍼니</div>
+          <div class="c-timeline__period">2024.09 — 2024.11<br>프로덕트 기획 & PM</div>
         </div>
-        <div class="exp-right">
-          <h3>배너플립 (BannerFlip) — 배너 교체 자동화 백오피스</h3>
-          <ul>
+        <div class="c-timeline__right">
+          <h3 class="c-timeline__title">배너플립 (BannerFlip) — 배너 교체 자동화 백오피스</h3>
+          <ul class="c-timeline__list">
             <li>다국어 배너 관리 요구사항 분석 및 화면설계서 작성, 개발팀과 협업하여 배포까지 전 과정 주도</li>
-            <li>미리보기·초기화 기능 기획으로 배너 교체 오류율 <strong>0% 달성</strong>, 교체 작업 시간 <strong>70% 단축</strong> (수작업 2시간 → 자동화 20분)
+            <li>미리보기·초기화 기능 기획으로 배너 교체 오류율 <strong>0% 달성</strong>, 작업 시간 <strong>70% 단축</strong> (수작업 2h → 자동화 20min)
             </li>
-            <li>국가별 개별 교체 기능 설계로 다국어 배너 관리 효율성 개선 및 신규 제품/케이스 추가 확장성 확보</li>
+            <li>국가별 개별 교체 기능 설계로 다국어 배너 관리 효율화 및 신규 제품/케이스 확장성 확보</li>
           </ul>
-          <div class="tags">
-            <span class="tag">Product Planning</span>
-            <span class="tag">Backoffice</span>
-            <span class="tag">Process Automation</span>
-            <span class="tag">Figma</span>
+          <div class="c-tags">
+            <span class="c-tag">Product Planning</span>
+            <span class="c-tag">Backoffice</span>
+            <span class="c-tag">Process Automation</span>
           </div>
         </div>
       </div>
 
-      <div class="exp-item">
-        <div class="exp-left">
-          <div class="exp-company">dktechin ·<br> Kakao Enterprise SW Academy</div>
-          <div class="exp-period">2024.07 – 2024.08<br>기획 & PM</div>
+      <div class="c-timeline__item">
+        <div class="c-timeline__left">
+          <div class="c-timeline__org">dktechin · Kakao SW Academy</div>
+          <div class="c-timeline__period">2024.07 — 2024.08<br>기획 & PM</div>
         </div>
-        <div class="exp-right">
-          <h3>dkvacation — 사내 휴양시설 추첨 및 예약 서비스</h3>
-          <ul>
-            <li>카카오, 삼성전자, 하나은행 3개 기업 대상 심층 인터뷰 진행 → 현행 시스템의 핵심 문제점 도출 및 서비스 방향성 수립</li>
-            <li>블록체인 기반 추첨 시스템 설계 — 실시간 통계 데이터 제공으로 추첨 투명성 및 사용자 신뢰도 향상</li>
-            <li>가점 정렬 대기순번 프로세스 설계로 미당첨자 우선순위 부여, 형평성 확보</li>
-            <li>WBS·요구사항 정의서·화면설계서 등 프로젝트 전체 산출물 문서화 체계 구축</li>
+        <div class="c-timeline__right">
+          <h3 class="c-timeline__title">dkvacation — 사내 휴양시설 추첨 및 예약 서비스</h3>
+          <ul class="c-timeline__list">
+            <li>카카오·삼성전자·하나은행 3개 기업 심층 인터뷰 → 현행 시스템 문제점 도출 및 서비스 방향성 수립</li>
+            <li>블록체인 기반 추첨 시스템 설계 — 실시간 통계 데이터 제공으로 투명성 및 사용자 신뢰도 향상</li>
+            <li>WBS·요구사항 정의서·화면설계서 전체 산출물 문서화 체계 구축</li>
           </ul>
-          <div class="tags">
-            <span class="tag">Service Planning</span>
-            <span class="tag">UX Research</span>
-            <span class="tag">Figma</span>
-            <span class="tag">Jira / Confluence</span>
+          <div class="c-tags">
+            <span class="c-tag">Service Planning</span>
+            <span class="c-tag">UX Research</span>
+            <span class="c-tag">Jira / Confluence</span>
           </div>
         </div>
       </div>
 
-      <div class="exp-item">
-        <div class="exp-left">
-          <div class="exp-company">UMC IT연합동아리</div>
-          <div class="exp-period">2023.09 – 2024.11<br>PM & 서비스 기획</div>
+      <div class="c-timeline__item">
+        <div class="c-timeline__left">
+          <div class="c-timeline__org">UMC IT연합동아리</div>
+          <div class="c-timeline__period">2023.09 — 2024.11<br>PM & 서비스 기획</div>
         </div>
-        <div class="exp-right">
-          <div class="award-badge">UMC 데모데이 Day3 대상 — 25개 대학 / 30팀</div>
-          <h3>음주미식회 — AI 기반 음식·주류 페어링 iOS 앱</h3>
-          <ul>
-            <li>데스크 리서치 및 자체 설문조사(n=80)로 MZ세대 주류 소비 트렌드 분석 → 음식-주류 페어링 니즈 발굴 및 서비스 방향성 수립</li>
-            <li>베타 테스트(n=7) 설계 및 분석 → AI 추천 대기 시간 체감도 개선, 전원 만족도 향상</li>
-            <li>QA 프로세스 체계화 및 60여 개 테스트 케이스 작성/관리 → 앱스토어 심사 통과 및 성공적 런칭</li>
-            <li>데모데이 현장 피드백(약 100명) 수집 및 분석 → 서비스 개선 및 이탈률 감소</li>
+        <div class="c-timeline__right">
+          <div class="c-award">UMC 데모데이 Day3 대상 — 25개 대학 / 30팀</div>
+          <h3 class="c-timeline__title">음주미식회 — AI 기반 음식·주류 페어링 iOS 앱</h3>
+          <ul class="c-timeline__list">
+            <li>설문조사(n=80)로 MZ세대 주류 소비 트렌드 분석 → 음식-주류 페어링 니즈 발굴</li>
+            <li>베타 테스트(n=7) 설계·분석 → AI 추천 대기 시간 체감도 개선, 전원 만족도 향상</li>
+            <li>QA 프로세스 체계화, 60여 개 테스트 케이스 작성/관리 → 앱스토어 심사 통과 및 런칭</li>
           </ul>
-          <div class="tags">
-            <span class="tag">PM</span>
-            <span class="tag">UX Research</span>
-            <span class="tag">QA</span>
-            <span class="tag">OpenAI API</span>
-            <span class="tag">Figma</span>
+          <div class="c-tags">
+            <span class="c-tag">PM</span>
+            <span class="c-tag">UX Research</span>
+            <span class="c-tag">QA</span>
+            <span class="c-tag">OpenAI API</span>
           </div>
         </div>
       </div>
 
-      <div class="exp-item">
-        <div class="exp-left">
-          <div class="exp-company">잇타 IT연합동아리</div>
-          <div class="exp-period">2023.03 – 2023.09<br>PM & 서비스 기획</div>
+      <div class="c-timeline__item">
+        <div class="c-timeline__left">
+          <div class="c-timeline__org">잇타 IT연합동아리</div>
+          <div class="c-timeline__period">2023.03 — 2023.09<br>PM & 서비스 기획</div>
         </div>
-        <div class="exp-right">
-          <div class="award-badge">잇타 3기 최종발표회 대상</div>
-          <h3>Travelend — 여행자 매칭 플랫폼</h3>
-          <ul>
-            <li>설문조사(n=50) 진행 및 분석 → 여행자 간 매칭 플랫폼 니즈 발굴 및 핵심 기능 도출</li>
-            <li>UX/UI 개선 및 2차 배포 진행 → 메인화면 가독성 개선으로 사용자 정보 전달력 <strong>30% 향상</strong></li>
-            <li>너디너리 데모데이 부스 초청 및 운영 → 현업자 피드백 수렴 및 서비스 개선 방향성 수립</li>
+        <div class="c-timeline__right">
+          <div class="c-award">잇타 3기 최종발표회 대상</div>
+          <h3 class="c-timeline__title">Travelend — 여행자 매칭 플랫폼</h3>
+          <ul class="c-timeline__list">
+            <li>설문조사(n=50) 분석 → 여행자 간 매칭 플랫폼 니즈 발굴 및 핵심 기능 도출</li>
+            <li>UX/UI 개선 및 2차 배포 → 메인화면 가독성 개선으로 정보 전달력 <strong>30% 향상</strong></li>
+            <li>너디너리 데모데이 부스 초청 운영 → 현업자 피드백 수렴 및 서비스 개선 방향 수립</li>
           </ul>
-          <div class="tags">
-            <span class="tag">PM</span>
-            <span class="tag">UX/UI Planning</span>
-            <span class="tag">User Research</span>
-            <span class="tag">Figma</span>
+          <div class="c-tags">
+            <span class="c-tag">PM</span>
+            <span class="c-tag">UX/UI Planning</span>
+            <span class="c-tag">User Research</span>
           </div>
         </div>
       </div>
 
-      <div class="exp-item">
-        <div class="exp-left">
-          <div class="exp-company">SK C&C</div>
-          <div class="exp-period">2023.11<br>팀장</div>
+      <div class="c-timeline__item">
+        <div class="c-timeline__left">
+          <div class="c-timeline__org">SK C&amp;C</div>
+          <div class="c-timeline__period">2023.11<br>팀장</div>
         </div>
-        <div class="exp-right">
-          <div class="award-badge">생성형 AI 프롬프톤 우수상</div>
-          <h3>SK C&C 대학생 직무프로젝트 — 생성형 AI 파트</h3>
-          <ul>
-            <li>금융 서비스 기획 및 카드 소비 데이터 세그먼트 분석 → 연령대별 차별화된 혜택 구조 설계 및 린캔버스 작성</li>
-            <li>프롬프트 엔지니어링 최적화 방법론 연구 → 6가지 핵심 원칙 도출, UX 시나리오 기반 주종 추천 대화형 GPT 제작</li>
+        <div class="c-timeline__right">
+          <div class="c-award">생성형 AI 프롬프톤 우수상</div>
+          <h3 class="c-timeline__title">SK C&amp;C 대학생 직무프로젝트 — 생성형 AI 파트</h3>
+          <ul class="c-timeline__list">
+            <li>금융 서비스 기획 및 카드 소비 데이터 세그먼트 분석 → 연령대별 차별화 혜택 구조 설계</li>
+            <li>프롬프트 엔지니어링 최적화 방법론 → 6가지 핵심 원칙 도출, UX 시나리오 기반 주종 추천 GPT 제작</li>
           </ul>
-          <div class="tags">
-            <span class="tag">Prompt Engineering</span>
-            <span class="tag">Generative AI</span>
-            <span class="tag">Service Planning</span>
-            <span class="tag">Design Thinking</span>
+          <div class="c-tags">
+            <span class="c-tag">Prompt Engineering</span>
+            <span class="c-tag">Generative AI</span>
+            <span class="c-tag">Design Thinking</span>
           </div>
         </div>
       </div>
@@ -1039,87 +1327,93 @@
     </div>
   </section>
 
-  <section id="publications">
-    <div class="section-label">연구 실적 (Publications)</div>
+  <!-- 05 PUBLICATIONS -->
+  <section class="c-section" id="publications">
+    <div class="c-section__header">
+      <span class="c-section__index">05</span>
+      <span class="c-section__title">연구 실적 (Publications)</span>
+      <span class="c-section__rule"></span>
+    </div>
     <div>
-      <div class="pub-item">
-        <span class="pub-badge">CHI '26 LBW</span>
+      <div class="c-pub">
+        <span class="c-pub__badge">CHI '26 LBW</span>
         <div>
-          <div class="pub-title">How and Who Should Refuse Harmful Requests in Voice Interaction?<br> Identifying AI
+          <div class="c-pub__title">How and Who Should Refuse Harmful Requests in Voice Interaction?<br>Identifying AI
             Refusal Strategies by Focusing on Shifts in Source and Modality</div>
-          <div
-            style="font-size: 0.88em; font-weight: 300; color: var(--muted); margin-top: 0.3rem; margin-bottom: 0.6rem; line-height: 1.5;">
-            음성 인터랙션 상황에서 AI는 어떻게 거절해야 하는가?: 출처와 모달리티의 변화에 따른 AI 거절 전략 규명</div>
-          <div class="pub-meta">[공동저자], Choi SeongJoon · CHI Conference on Human Factors in Computing Systems, 2026
+          <div class="c-pub__subtitle">음성 인터랙션 상황에서 AI는 어떻게 거절해야 하는가?: 출처와 모달리티의 변화에 따른 AI 거절 전략 규명</div>
+          <div class="c-pub__meta">[공동저자] Choi SeongJoon · CHI Conference on Human Factors in Computing Systems, 2026
           </div>
         </div>
       </div>
     </div>
   </section>
 
-  <section id="skills">
-    <div class="section-label">스킬 및 자격증 (Skills & Certifications)</div>
-
-    <div class="skills-table">
-      <div class="skills-col-header">직무 역량 (Skills)</div>
-      <div class="skills-col-header">도구 및 AI 활용 (Tools)</div>
-
-      <div class="skill-row-item"><span class="dot"></span>UX 리서치 기반 인사이트 도출</div>
-      <div class="tool-row-item"><span class="tool-label">AI 바이브 코딩 및 디자인</span>Figma Make, Claude Code, Antigravity,
-        Gemini CLI, Claude Artifacts, Gemini Canvas, NotebookLM</div>
-
-      <div class="skill-row-item"><span class="dot"></span>인터랙션 디자인 및 유저 플로우 기획</div>
-      <div class="tool-row-item"><span class="tool-label">문서화 및 디자인</span>Figma, Google Workspace with Gemini</div>
-
-      <div class="skill-row-item"><span class="dot"></span>HCI (인간-컴퓨터 상호작용) 방법론</div>
-      <div class="tool-row-item"><span class="tool-label">리서치 및 분석</span>SQL (BigQuery), Splunk, Mixpanel</div>
-
-      <div class="skill-row-item"><span class="dot"></span>AI 프롬프팅 및 모델 사용 경험 최적화</div>
-      <div class="tool-row-item"><span class="tool-label">어학</span>TOEIC Speaking IH (Intermediate High)</div>
-
-      <div class="skill-row-item"><span class="dot"></span>데이터 분석 논리 및 기획 역량</div>
-      <div class="tool-row-item"></div>
+  <!-- 06 SKILLS -->
+  <section class="c-section" id="skills">
+    <div class="c-section__header">
+      <span class="c-section__index">06</span>
+      <span class="c-section__title">스킬 및 자격증 (Skills & Certifications)</span>
+      <span class="c-section__rule"></span>
     </div>
 
-    <div class="cert-section">
-      <h4 class="cert-header">자격증 및 수료내역 (Certifications)</h4>
-      <ul class="cert-list">
-        <li><strong>AI-POT (AI프롬프트 활용능력) 1급</strong><span class="cert-meta">KPC 한국생산성본부 · 2025.08</span></li>
-        <li><strong>Kakao Enterprise SW Academy 4기 (PM) 과정 수료</strong><span class="cert-meta">카카오엔터프라이즈 마이크로디그리 ·
+    <div class="c-skills-grid">
+      <div class="c-skills-col-head">직무 역량 (Skills)</div>
+      <div class="c-skills-col-head">도구 및 AI 활용 (Tools)</div>
+
+      <div class="c-skill-row"><span class="c-skill-dot"></span>UX 리서치 기반 인사이트 도출</div>
+      <div class="c-tool-row"><span class="c-tool-label">AI 바이브 코딩 및 디자인</span><span class="c-tool-value">Figma Make,
+          Claude Code, Antigravity, Gemini CLI, Claude Artifacts, Gemini Canvas, NotebookLM</span></div>
+
+      <div class="c-skill-row"><span class="c-skill-dot"></span>인터랙션 디자인 및 유저 플로우 기획</div>
+      <div class="c-tool-row"><span class="c-tool-label">문서화 및 디자인</span><span class="c-tool-value">Figma, Google
+          Workspace with Gemini</span></div>
+
+      <div class="c-skill-row"><span class="c-skill-dot"></span>HCI (인간-컴퓨터 상호작용) 방법론</div>
+      <div class="c-tool-row"><span class="c-tool-label">리서치 및 분석</span><span class="c-tool-value">SQL (BigQuery),
+          Splunk, Mixpanel</span></div>
+
+      <div class="c-skill-row"><span class="c-skill-dot"></span>AI 프롬프팅 및 모델 사용 경험 최적화</div>
+      <div class="c-tool-row"><span class="c-tool-label">어학</span><span class="c-tool-value">TOEIC Speaking IH
+          (Intermediate High)</span></div>
+
+      <div class="c-skill-row"><span class="c-skill-dot"></span>데이터 분석 논리 및 기획 역량</div>
+      <div class="c-tool-row"></div>
+    </div>
+
+    <div class="c-cert-block">
+      <h4 class="c-cert-head">자격증 및 수료내역 (Certifications)</h4>
+      <ul class="c-cert-list">
+        <li><strong>AI-POT (AI프롬프트 활용능력) 1급</strong><span class="c-cert-meta">KPC 한국생산성본부 · 2025.08</span></li>
+        <li><strong>Kakao Enterprise SW Academy 4기 (PM) 과정 수료</strong><span class="c-cert-meta">카카오엔터프라이즈 마이크로디그리 ·
             2024.08</span></li>
-        <li><strong>ADsP (데이터분석준전문가)</strong><span class="cert-meta">한국데이터산업진흥원 · 2024.06</span></li>
-        <li><strong>SQLD (SQL개발자)</strong><span class="cert-meta">한국데이터산업진흥원 · 2024.04</span></li>
-        <li><strong>6시그마 Black Belt</strong><span class="cert-meta">한국정보인재개발원 · 2024.02</span></li>
+        <li><strong>ADsP (데이터분석준전문가)</strong><span class="c-cert-meta">한국데이터산업진흥원 · 2024.06</span></li>
+        <li><strong>SQLD (SQL개발자)</strong><span class="c-cert-meta">한국데이터산업진흥원 · 2024.04</span></li>
+        <li><strong>6시그마 Black Belt</strong><span class="c-cert-meta">한국정보인재개발원 · 2024.02</span></li>
       </ul>
     </div>
   </section>
 
-  <footer>
-    <p>© 2026 Choi SeongJoon</p>
-    <div class="contact-links">
-      <a href="https://www.linkedin.com/in/seongjoon-choi-a00057374/" target="_blank">LinkedIn</a>
+  <!-- FOOTER -->
+  <footer class="c-footer">
+    <span class="c-footer__copy">© 2026 Choi SeongJoon — Built with intention.</span>
+    <div class="c-footer__links">
+      <a href="https://www.linkedin.com/in/seongjoon-choi-a00057374/" target="_blank"
+        class="c-footer__link">LinkedIn</a>
     </div>
   </footer>
 
   <script>
     const sections = ['competencies', 'education', 'experience', 'projects', 'publications', 'skills'];
-
     const observer = new IntersectionObserver((entries) => {
       entries.forEach(entry => {
         if (entry.isIntersecting) {
-          document.querySelectorAll('.prog-item').forEach(item => item.classList.remove('active'));
-          const active = document.querySelector(`.prog-item[data-section="${entry.target.id}"]`);
+          document.querySelectorAll('.c-seqbar__item').forEach(el => el.classList.remove('active'));
+          const active = document.querySelector(`.c-seqbar__item[data-section="${entry.target.id}"]`);
           if (active) active.classList.add('active');
         }
       });
-    }, {
-      rootMargin: '-30% 0px -60% 0px'
-    });
-
-    sections.forEach(id => {
-      const el = document.getElementById(id);
-      if (el) observer.observe(el);
-    });
+    }, { rootMargin: '-25% 0px -65% 0px' });
+    sections.forEach(id => { const el = document.getElementById(id); if (el) observer.observe(el); });
   </script>
 
 </body>
