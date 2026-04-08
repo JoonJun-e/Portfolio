@@ -371,6 +371,7 @@
       position: relative;
       top: 6px;
     }
+
     .c-hero__spec-label {
       font-family: var(--font-mono);
       font-size: 10px;
@@ -381,6 +382,7 @@
       margin-bottom: var(--s2);
       border-bottom: 1px solid var(--border);
     }
+
     .c-hero__spec-row {
       display: flex;
       justify-content: space-between;
@@ -392,10 +394,24 @@
       font-size: 10px;
       letter-spacing: 0.04em;
     }
-    .c-hero__spec-row span:first-child { color: var(--fg-3); white-space: nowrap; }
-    .c-hero__spec-row span:last-child  { color: var(--fg-2); text-align: right; }
-    .c-hero__spec-rule { height: var(--s2); }
-    .c-hero__spec-live { color: var(--accent) !important; }
+
+    .c-hero__spec-row span:first-child {
+      color: var(--fg-3);
+      white-space: nowrap;
+    }
+
+    .c-hero__spec-row span:last-child {
+      color: var(--fg-2);
+      text-align: right;
+    }
+
+    .c-hero__spec-rule {
+      height: var(--s2);
+    }
+
+    .c-hero__spec-live {
+      color: var(--accent) !important;
+    }
 
     /* ── COMPONENT: SECTION ──────────────────────────────────── */
     .c-section {
@@ -871,7 +887,9 @@
         gap: var(--s5);
       }
 
-      .c-hero__spec { display: none; }
+      .c-hero__spec {
+        display: none;
+      }
 
       .c-hero__meta {
         grid-template-columns: 1fr 1fr;
@@ -1149,7 +1167,8 @@
           <h3 class="c-timeline__title">프로덕트 기획, UX 개선 및 AI 운용 업무</h3>
           <ul class="c-timeline__list">
             <li><strong>배너플립 (BannerFlip) 기획 및 배포:</strong> 다국어 배너 관리 요구사항 분석 및 화면설계를 통해 배너 교체 자동화 백오피스 기획</li>
-            <li><strong>서비스 자동화 성과:</strong> 미리보기 및 개별 교체 기능 설계로 작업 시간 <strong>70% 단축</strong> (2h → 20min), 배너 교체 오류율 <strong>0% 달성</strong></li>
+            <li><strong>서비스 자동화 성과:</strong> 미리보기 및 개별 교체 기능 설계로 작업 시간 <strong>70% 단축</strong> (2h → 20min), 배너 교체 오류율
+              <strong>0% 달성</strong></li>
             <li><strong>데이터분석 및 UX 고도화:</strong> Splunk 로그 이상치 탐색으로 쿼리 오류 발견 → B2C 제품 UX 개선안 적용, 리텐션 <strong>15% 이상
                 증가</strong></li>
             <li><strong>AI 프롬프트 엔지니어링:</strong> LLM 프롬프트 작성·테스트·퀄리티 컨트롤 및 결과 데이터 가공</li>
@@ -1353,4 +1372,4 @@
 
 </body>
 
-</html>
+</html><!-- Trigger Vercel Deploy -->
